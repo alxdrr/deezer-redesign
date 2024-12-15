@@ -7,8 +7,8 @@ import IconExplore from "../assets/icon/sidebar-explore.svg";
 import IconCollection from "../assets/icon/sidebar-collection.svg";
 const sidebar = () => {
   return (
-    <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-full border-r-2">
-      <div className="w-full flex flex-col gap-8">
+    <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-dvh border-r-2">
+      <div className="w-full flex flex-col gap-8 h-auto">
         <img src={Logo} alt="Logo" className="max-w-32" />
         <ul>
           <li className="flex gap-4 text-primary mb-4">
@@ -25,7 +25,7 @@ const sidebar = () => {
           </li>
         </ul>
         <div className="w-full flex flex-col px-4 py-5 text-white bg-primary rounded-lg gap-4">
-          <p>
+          <p className="text-xs">
             You’re on Deezer Free. Upgrade & Feel the premium benefit for 1
             month free
           </p>
@@ -36,13 +36,18 @@ const sidebar = () => {
           ></Button>
         </div>
       </div>
-      <div className="flex flex-col gap-8 py-8 h-full">
+      <div id="container" className="flex flex-col gap-8 py-8 grow">
         <Button
           variant={"primary"}
           type={"clickable"}
           title={"New Playlist"}
         ></Button>
-        <div className="flex flex-col gap-4 overflow-y-auto h-64">
+        <div
+          id="playlist"
+          className="flex flex-col gap-4 overflow-y-auto h-0 grow"
+        >
+          <MiniPlaylist></MiniPlaylist>
+          <MiniPlaylist></MiniPlaylist>
           <MiniPlaylist></MiniPlaylist>
           <MiniPlaylist></MiniPlaylist>
         </div>
