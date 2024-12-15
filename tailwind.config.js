@@ -5,10 +5,12 @@ export default {
     extend: {
       colors: {
         primary: "#556AEB",
+        hover: "#EBEFFF",
         "neutral-0": "#FFFFFF",
         "neutral-500": "#ADB5BD",
         "neutral-600": "#6C757D",
         "neutral-800": "#343A40",
+        "purple-100": "#EBEFFF",
       },
       boxShadow: {
         1: "0px 2px 2px 0px rgba(33, 37, 41, 0.06), 0px 0px 1px 0px rgba(33, 37, 41, 0.08)",

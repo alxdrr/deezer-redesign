@@ -11,3 +11,27 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ced4da;
+  border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #556aeb;
+  border-radius: 30px;
+  transition: 1s ease-out;
+}
