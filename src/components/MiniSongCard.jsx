@@ -7,7 +7,7 @@ const MiniSongCard = () => {
       <div className="relative flex h-full gap-4 items-center">
         {/* Cover */}
         {/* Kode ketika di hover */}
-        <div className="absolute aspect-square flex items-center justify-center bg-black/50 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 transition-opacity duration-300">
           <img src={Album} alt="Cover" className="brightness-50" />
           <img src={PlayButton} alt="Cover" className="absolute" />
         </div>
