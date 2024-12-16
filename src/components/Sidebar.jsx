@@ -50,6 +50,9 @@ const sidebar = () => {
           <MiniPlaylist></MiniPlaylist>
           <MiniPlaylist></MiniPlaylist>
           <MiniPlaylist></MiniPlaylist>
+          <MiniPlaylist></MiniPlaylist>
+          <MiniPlaylist></MiniPlaylist>
+          <MiniPlaylist></MiniPlaylist>
         </div>
       </div>
     </div>

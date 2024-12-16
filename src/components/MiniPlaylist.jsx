@@ -1,5 +1,5 @@
 import React from "react";
-import PlaylistCover from "../assets/image/PlaylistCover.png";
+import PlaylistCover from "../assets/album-cover/Album2.jpg";
 
 const MiniPlaylist = () => {
   return (
