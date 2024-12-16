@@ -1,5 +1,5 @@
 import React from "react";
-import Avatar from "../assets/image/PlaylistCover.png";
+import Avatar from "../assets/image/profile.jpg";
 import MiniSongCard from "../components/MiniSongCard";
 import DailyPlaylistCard from "../components/DailyPlaylistCard";
 
@@ -27,7 +27,7 @@ const home = () => {
           <MiniSongCard />
         </div>
       </div>
-      <div className="h-auto gap-2.5">
+      <div className="h-auto gap-2.5 flex flex-col">
         <h1 className="text-3xl text-neutral-800 font-black">Discover</h1>
         <div className="flex flex-wrap gap-4 h-auto">
           <DailyPlaylistCard />
@@ -40,7 +40,7 @@ const home = () => {
           <DailyPlaylistCard />
         </div>
       </div>
-      <div className="h-auto gap-2.5">
+      <div className="h-auto gap-2.5 flex flex-col">
         <h1 className="text-3xl text-neutral-800 font-black">Made For You</h1>
         <div className="flex flex-wrap gap-4 h-auto">
           <DailyPlaylistCard />
