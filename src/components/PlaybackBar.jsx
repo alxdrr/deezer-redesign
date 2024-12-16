@@ -41,8 +41,8 @@ const PlaybackBar = () => {
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">1.32</p>
-          <div className="w-0 grow">
-            <hr className="h-[3px] w-full border-none bg-neutral-500 cursor-pointer" />
+          <div className="w-0 grow h-[3px] bg-neutral-500">
+            <hr className="h-[3px] w-4/6 border-none bg-primary rounded-full cursor-pointer" />
           </div>
           <p className="text-xs text-neutral-800">2.05</p>
         </div>
