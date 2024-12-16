@@ -50,9 +50,11 @@ const PlaybackBar = () => {
       <div className="flex gap-2 text-primary h-full items-center text-base max-w-1/3">
         <IoListSharp className="cursor-pointer" />
         <IoWifiSharp className="cursor-pointer" />
-        <div className="flex items-center">
+        <div className="flex items-center w-[72px]">
           <IoVolumeOff className="cursor-pointer" />
-          <hr className="h-[3px] w-20 border-none bg-primary cursor-pointer" />
+          <div className="w-full grow h-[3px] bg-neutral-400">
+            <hr className="h-[3px] w-1/3 border-none bg-primary cursor-pointer rounded-full" />
+          </div>
         </div>
         <IoNewspaperSharp className="cursor-pointer" />
         <PiMicrophoneStage className="cursor-pointer" />
