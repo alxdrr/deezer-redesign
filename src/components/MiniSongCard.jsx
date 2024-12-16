@@ -27,7 +27,7 @@ const MiniSongCard = () => {
       </div>
       <div className="justify-between flex flex-col items-end">
         <p className="text-neutral-800 text-xs">3:20</p>
-        <p className="text-neutral-800 text-xs font-bold">. . .</p>
+        <p className="text-neutral-800 text-xs font-bold">...</p>
       </div>
     </div>
   );

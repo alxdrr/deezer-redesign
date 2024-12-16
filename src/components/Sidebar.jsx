@@ -4,23 +4,25 @@ import MiniPlaylist from "./MiniPlaylist";
 import Logo from "../assets/image/LogoBlack.png";
 import IconHome from "../assets/icon/sidebar-home.svg";
 import IconExplore from "../assets/icon/sidebar-explore.svg";
+import { IoSearch } from "react-icons/io5";
+import { BiHomeAlt2, BiCollection } from "react-icons/bi";
 import IconCollection from "../assets/icon/sidebar-collection.svg";
 const sidebar = () => {
   return (
     <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-dvh border-r-2">
-      <div className="w-full flex flex-col gap-8 h-auto">
+      <div className="w-full flex flex-col gap-4 h-auto">
         <img src={Logo} alt="Logo" className="max-w-32" />
         <ul>
-          <li className="flex gap-4 text-primary mb-4">
-            <img src={IconHome} alt="" />
+          <li className="flex gap-4 items-center text-primary mb-4 cursor-pointer">
+            <BiHomeAlt2 />
             <p className="font-bold">Home</p>
           </li>
-          <li className="flex gap-4 text-neutral-500 mb-4">
-            <img src={IconExplore} alt="" />
+          <li className="flex items-center gap-4 text-neutral-500 transition-colors duration-150 mb-4 hover:text-primary cursor-pointer">
+            <IoSearch />
             <p className="font-bold">Explore</p>
           </li>
-          <li className="flex gap-4 text-neutral-500">
-            <img src={IconCollection} alt="" />
+          <li className="flex gap-4 items-center text-neutral-500 transition-colors duration-150 hover:text-primary cursor-pointer">
+            <BiCollection />
             <p className="font-bold">Collection</p>
           </li>
         </ul>
@@ -36,7 +38,7 @@ const sidebar = () => {
           ></Button>
         </div>
       </div>
-      <div id="container" className="flex flex-col gap-8 py-8 grow">
+      <div id="container" className="flex flex-col gap-2 py-2 grow">
         <Button
           variant={"primary"}
           type={"clickable"}
