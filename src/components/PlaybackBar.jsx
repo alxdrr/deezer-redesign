@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Plays from "../assets/album-cover/Album5.jpg";
 import { FaRegHeart, FaPlus } from "react-icons/fa6";
 import { PiMicrophoneStage } from "react-icons/pi";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
@@ -18,15 +17,15 @@ import { PlayerContext } from "../context/PlayerContext";
 import { songsData } from "../assets/object/songsData";
 
 const PlaybackBar = () => {
-  const { seekBar, seekBg, playStatus, play, pause } =
+  const { seekBar, seekBg, playStatus, play, pause, track } =
     useContext(PlayerContext);
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
       <div className="flex gap-4 h-full w-auto duration-150 items-center">
-        <img src={Plays} alt="Cover" className="h-full" />
+        <img src={track.image} alt="Cover" className="h-full" />
         <div className="flex flex-col">
-          <p className="text-neutral-800 font-bold text-sm">About You</p>
-          <p className="text-neutral-600 text-xs">The 1975</p>
+          <p className="text-neutral-800 font-bold text-sm">{track.name}</p>
+          <p className="text-neutral-600 text-xs">{track.artist}</p>
         </div>
         <div className="flex h-full gap-2 text-neutral-800 items-center">
           <FaRegHeart className="cursor-pointer" />
@@ -38,14 +37,17 @@ const PlaybackBar = () => {
           <IoShuffleOutline className="cursor-pointer" />
           <BiSkipPrevious className="cursor-pointer" />
           <p className="text-3xl">
-            <IoPlayCircleSharp onClick={play} className="cursor-pointer" />
-            <IoPauseCircleSharp onClick={pause} className="cursor-pointer" />
+            {playStatus ? (
+              <IoPauseCircleSharp onClick={pause} className="cursor-pointer" />
+            ) : (
+              <IoPlayCircleSharp onClick={play} className="cursor-pointer" />
+            )}
           </p>
           <BiSkipNext className="cursor-pointer" />
           <IoRepeat className="cursor-pointer" />
         </div>
         <div className="flex gap-2 w-full items-center">
-          <p className="text-xs text-neutral-800">1.32</p>
+          <p className="text-xs text-neutral-800">{track.duration}</p>
           <div ref={seekBg} className="w-0 grow h-[3px] bg-neutral-500">
             <hr
               ref={seekBar}
