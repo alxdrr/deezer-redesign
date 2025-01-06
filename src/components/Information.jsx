@@ -1,9 +1,20 @@
 import React from "react";
 import Avatar from "../assets/album-cover/Album6.jpg";
+import { motion } from "framer-motion";
 
-const Information = () => {
+const Information = ({ isOpen }) => {
+  const drawerVariants = {
+    open: { x: 0, opacity: 1 },
+    closed: { x: "100%", opacity: 0 },
+  };
   return (
-    <div className="absolute w-auto max-w-xs right-0 top-16 h-[89%] bg-slate-200 flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20">
+    <motion.div
+      className="absolute w-auto max-w-xs right-0 top-16 h-[89%] bg-slate-200 flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20"
+      initial="closed"
+      animate={isOpen ? "open" : "closed"}
+      variants={drawerVariants}
+      transition={{ type: "tween", duration: 0.2 }}
+    >
       <div className="flex relative flex-col bg-white rounded-lg w-full gap-2 px-3 py-3 shadow-2 transition-colors duration-150 cursor-pointer items-center">
         <img
           src={Avatar}
@@ -58,7 +69,7 @@ const Information = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

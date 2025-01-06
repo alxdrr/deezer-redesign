@@ -16,7 +16,7 @@ import {
 import { PlayerContext } from "../context/PlayerContext";
 import { songsData } from "../assets/object/songsData";
 
-const PlaybackBar = () => {
+const PlaybackBar = ({ drawer }) => {
   const {
     seekBar,
     seekBg,
@@ -108,7 +108,7 @@ const PlaybackBar = () => {
             className="custom-range w-full h-[4px] bg-gray-300 rounded-lg appearance-none focus:outline-none"
           />
         </div>
-        <IoNewspaperSharp className="cursor-pointer" />
+        <IoNewspaperSharp onClick={drawer} className="cursor-pointer" />
         <PiMicrophoneStage className="cursor-pointer" />
         <IoOptions className="cursor-pointer" />
       </div>

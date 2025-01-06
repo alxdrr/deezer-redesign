@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Information from "./components/Information";
@@ -8,6 +8,7 @@ import { PlayerContext } from "./context/PlayerContext";
 
 const App = () => {
   const { audioRef, track, handleEnded } = useContext(PlayerContext);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="w-screen h-dvh flex-col">
       <div className="w-screen relative h-[89%] flex">
@@ -22,9 +23,9 @@ const App = () => {
             onEnded={handleEnded}
           ></audio>
         </div>
-        <Information />
+        <Information isOpen={isOpen} />
       </div>
-      <PlaybackBar />
+      <PlaybackBar drawer={() => setIsOpen(!isOpen)} />
     </div>
   );
 };
