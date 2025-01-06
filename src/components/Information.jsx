@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Avatar from "../assets/album-cover/Album6.jpg";
 import { PlayerContext } from "../context/PlayerContext";
 import { motion } from "framer-motion";
-import verified from "../assets/icon/Information-verified.svg";
+import verified from "../assets/icon/information-verified.svg";
 
 const Information = ({ isOpen }) => {
   const { track } = useContext(PlayerContext);
