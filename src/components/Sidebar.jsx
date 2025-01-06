@@ -9,7 +9,7 @@ import { BiHomeAlt2, BiCollection } from "react-icons/bi";
 import IconCollection from "../assets/icon/sidebar-collection.svg";
 const sidebar = () => {
   return (
-    <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-dvh border-r-2">
+    <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-full border-r-2">
       <div className="w-full flex flex-col gap-4 h-auto">
         <img src={Logo} alt="Logo" className="max-w-32" />
         <ul>
