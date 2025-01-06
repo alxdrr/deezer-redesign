@@ -30,7 +30,7 @@ export const songsData = [
     image: album1,
     file: song1,
     duration: "2:58",
-    listener: "96,900,321",
+    listener: "96,900,311",
     artistProfile: `An iconic American singer-songwriter, Taylor Swift is known for her narrative songwriting and genre evolution, achieving immense success with hits like "Love Story" and "Shake It Off."`,
     about: `This song captures the exhilarating highs and painful lows of a summer romance. It explores the thrill of infatuation mixed with vulnerability, portraying the bittersweet emotions of a love that feels both intoxicating and precarious.`,
   },
