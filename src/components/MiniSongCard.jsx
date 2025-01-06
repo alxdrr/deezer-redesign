@@ -1,5 +1,4 @@
 import React from "react";
-import Album from "../assets/album-cover/Album1.jpg";
 import PlayButton from "../assets/icon/playbutton.svg";
 const MiniSongCard = ({ title, artist, duration, image }) => {
   return (
@@ -8,7 +7,7 @@ const MiniSongCard = ({ title, artist, duration, image }) => {
         {/* Cover */}
         {/* Kode ketika di hover */}
         <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 transition-opacity duration-300">
-          <img src={Album} alt="Cover" className="brightness-50" />
+          <img src={image} alt="Cover" className="brightness-50" />
           <img src={PlayButton} alt="Cover" className="absolute" />
         </div>
 
@@ -21,7 +20,9 @@ const MiniSongCard = ({ title, artist, duration, image }) => {
 
         {/* Playlist Information */}
         <div className="flex flex-col">
-          <p className="text-neutral-800 font-black line-clamp-1">{title}</p>
+          <p className="text-neutral-800 font-bold text-sm line-clamp-1">
+            {title}
+          </p>
           <p className="text-neutral-600 text-xs line-clamp-1">{artist}</p>
         </div>
       </div>

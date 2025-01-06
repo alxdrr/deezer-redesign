@@ -7,13 +7,15 @@ import album6 from "../album-cover/Album6.jpg";
 import album7 from "../album-cover/Album7.jpg";
 import album8 from "../album-cover/Album8.jpg";
 import album9 from "../album-cover/Album9.jpg";
+import song1 from "../mp3/song1.mp3";
 
-export const songData = [
+export const songsData = [
   {
     id: 0,
     name: "Cruel Summer",
     artist: "Taylor Swift",
     image: album1,
+    file: song1,
     duration: "2:58",
   },
   {
@@ -86,4 +88,13 @@ export const songData = [
     image: album9,
     duration: "2:58",
   },
+  {
+    id: 11,
+    name: "Daylight",
+    artist: "Taylor Swift",
+    image: album1,
+    duration: "4:53",
+  },
 ];
+
+// export default songsData;

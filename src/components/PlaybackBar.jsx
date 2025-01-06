@@ -1,5 +1,5 @@
-import React from "react";
-import Play from "../assets/album-cover/Album5.jpg";
+import React, { useContext } from "react";
+import Plays from "../assets/album-cover/Album5.jpg";
 import { FaRegHeart, FaPlus } from "react-icons/fa6";
 import { PiMicrophoneStage } from "react-icons/pi";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
@@ -14,14 +14,18 @@ import {
   IoNewspaperSharp,
   IoOptions,
 } from "react-icons/io5";
+import { PlayerContext } from "../context/PlayerContext";
+import { songsData } from "../assets/object/songsData";
 
 const PlaybackBar = () => {
+  const { seekBar, seekBg, playStatus, play, pause } =
+    useContext(PlayerContext);
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
       <div className="flex gap-4 h-full w-auto duration-150 items-center">
-        <img src={Play} alt="Cover" className="h-full" />
+        <img src={Plays} alt="Cover" className="h-full" />
         <div className="flex flex-col">
-          <p className="text-neutral-800 font-black text-sm">About You</p>
+          <p className="text-neutral-800 font-bold text-sm">About You</p>
           <p className="text-neutral-600 text-xs">The 1975</p>
         </div>
         <div className="flex h-full gap-2 text-neutral-800 items-center">
@@ -34,15 +38,19 @@ const PlaybackBar = () => {
           <IoShuffleOutline className="cursor-pointer" />
           <BiSkipPrevious className="cursor-pointer" />
           <p className="text-3xl">
-            <IoPlayCircleSharp className="cursor-pointer" />
+            <IoPlayCircleSharp onClick={play} className="cursor-pointer" />
+            <IoPauseCircleSharp onClick={pause} className="cursor-pointer" />
           </p>
           <BiSkipNext className="cursor-pointer" />
           <IoRepeat className="cursor-pointer" />
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">1.32</p>
-          <div className="w-0 grow h-[3px] bg-neutral-500">
-            <hr className="h-[3px] w-4/6 border-none bg-primary rounded-full cursor-pointer" />
+          <div ref={seekBg} className="w-0 grow h-[3px] bg-neutral-500">
+            <hr
+              ref={seekBar}
+              className="h-[3px] w-4/6 border-none bg-primary rounded-full cursor-pointer"
+            />
           </div>
           <p className="text-xs text-neutral-800">2.05</p>
         </div>

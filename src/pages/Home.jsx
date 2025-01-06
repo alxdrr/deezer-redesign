@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "../assets/image/profile.jpg";
 import MiniSongCard from "../components/MiniSongCard";
 import DailyPlaylistCard from "../components/DailyPlaylistCard";
-import { songData } from "../assets/object/songsData";
+import { songsData } from "../assets/object/songsData";
 
 const home = () => {
   return (
@@ -20,7 +20,7 @@ const home = () => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4">
-          {songData.map((item, index) => (
+          {songsData.map((item, index) => (
             <MiniSongCard
               key={index}
               title={item.name}
