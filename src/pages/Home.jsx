@@ -27,6 +27,7 @@ const home = () => {
               artist={item.artist}
               duration={item.duration}
               image={item.image}
+              id={item.id}
             />
           ))}
         </div>

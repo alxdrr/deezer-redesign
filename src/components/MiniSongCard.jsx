@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import PlayButton from "../assets/icon/playbutton.svg";
-const MiniSongCard = ({ title, artist, duration, image }) => {
+import { PlayerContext } from "../context/PlayerContext";
+const MiniSongCard = ({ title, artist, duration, image, id }) => {
+  const { playWithId } = useContext(PlayerContext);
   return (
-    <div className="flex gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group">
+    <div
+      onClick={() => playWithId(id)}
+      className="flex gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group"
+    >
       <div className="relative flex h-full gap-4 items-center">
         {/* Cover */}
         {/* Kode ketika di hover */}

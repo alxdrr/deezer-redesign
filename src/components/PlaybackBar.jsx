@@ -17,8 +17,18 @@ import { PlayerContext } from "../context/PlayerContext";
 import { songsData } from "../assets/object/songsData";
 
 const PlaybackBar = () => {
-  const { seekBar, seekBg, playStatus, play, pause, track, time } =
-    useContext(PlayerContext);
+  const {
+    seekBar,
+    seekBg,
+    playStatus,
+    play,
+    pause,
+    track,
+    time,
+    previous,
+    next,
+    seekSong,
+  } = useContext(PlayerContext);
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
       <div className="flex gap-4 h-full w-auto duration-150 items-center">
@@ -35,7 +45,7 @@ const PlaybackBar = () => {
       <div className="flex flex-col w-[35%] h-full items-center">
         <div className="flex gap-2 text-primary h-full items-center text-2xl">
           <IoShuffleOutline className="cursor-pointer" />
-          <BiSkipPrevious className="cursor-pointer" />
+          <BiSkipPrevious onClick={previous} className="cursor-pointer" />
           <p className="text-3xl">
             {playStatus ? (
               <IoPauseCircleSharp onClick={pause} className="cursor-pointer" />
@@ -43,17 +53,21 @@ const PlaybackBar = () => {
               <IoPlayCircleSharp onClick={play} className="cursor-pointer" />
             )}
           </p>
-          <BiSkipNext className="cursor-pointer" />
+          <BiSkipNext onClick={next} className="cursor-pointer" />
           <IoRepeat className="cursor-pointer" />
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">
             {time.currentTime.minute}:{time.currentTime.second}
           </p>
-          <div ref={seekBg} className="w-0 grow h-[3px] bg-neutral-500">
+          <div
+            ref={seekBg}
+            onClick={seekSong}
+            className="w-0 grow h-[3px] bg-neutral-500"
+          >
             <hr
               ref={seekBar}
-              className="h-[3px] w-4/6 border-none bg-primary rounded-full cursor-pointer"
+              className="h-[3px] w-0 border-none bg-primary rounded-full cursor-pointer"
             />
           </div>
           <p className="text-xs text-neutral-800">
