@@ -35,3 +35,15 @@ html {
   border-radius: 30px;
   transition: 1s ease-out;
 }
+
+/* Custom Thumb */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background-color: #556aeb; /* Warna thumb */
+  border-radius: 50%; /* Membuat thumb bulat */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

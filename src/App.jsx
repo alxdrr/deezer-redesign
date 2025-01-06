@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import { PlayerContext } from "./context/PlayerContext";
 
 const App = () => {
-  const { audioRef, track } = useContext(PlayerContext);
+  const { audioRef, track, handleEnded } = useContext(PlayerContext);
   return (
     <div className="w-screen h-dvh flex">
       <Sidebar />
@@ -14,7 +14,12 @@ const App = () => {
         <Header />
         <Home />
         <PlaybackBar />
-        <audio ref={audioRef} src={track.file} preload="auto"></audio>
+        <audio
+          ref={audioRef}
+          src={track.file}
+          preload="auto"
+          onEnded={handleEnded}
+        ></audio>
       </div>
     </div>
   );

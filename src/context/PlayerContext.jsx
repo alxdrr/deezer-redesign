@@ -9,6 +9,7 @@ const PlayerContextProvider = (props) => {
 
   const [track, setTrack] = useState(songsData[9]);
   const [playStatus, setPlayStatus] = useState(false);
+  const [repeatStatus, setRepeatStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -17,6 +18,15 @@ const PlayerContextProvider = (props) => {
     totalTime: { second: 0, minute: 0 },
   });
 
+  const [volume, setVolume] = useState(1);
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume; // Mengubah volume audio
+    }
+  };
   const play = () => {
     audioRef.current.play();
     setPlayStatus(true);
@@ -27,13 +37,26 @@ const PlayerContextProvider = (props) => {
     setPlayStatus(false);
   };
 
+  const repeat = () => {
+    setRepeatStatus(!repeatStatus);
+  };
+
+  const handleEnded = () => {
+    repeatStatus ? play() : next();
+  };
+
   const previous = async () => {
-    if (track.id > 0) {
-      await setTrack(songsData[track.id - 1]);
-      await audioRef.current.play();
-      setPlayStatus(true);
+    if (audioRef.current.currentTime > 3) {
+      audioRef.current.currentTime = 0;
+    } else {
+      if (track.id > 0) {
+        await setTrack(songsData[track.id - 1]);
+        await audioRef.current.play();
+        setPlayStatus(true);
+      }
     }
   };
+
   const next = async () => {
     if (track.id < songsData.length - 1) {
       await setTrack(songsData[track.id + 1]);
@@ -78,6 +101,8 @@ const PlayerContextProvider = (props) => {
     audioRef,
     seekBg,
     seekBar,
+    volume,
+    handleVolumeChange,
     track,
     setTrack,
     playStatus,
@@ -86,10 +111,13 @@ const PlayerContextProvider = (props) => {
     setTime,
     play,
     pause,
+    repeatStatus,
+    repeat,
     playWithId,
     previous,
     next,
     seekSong,
+    handleEnded,
   };
   return (
     <PlayerContext.Provider value={contextValue}>

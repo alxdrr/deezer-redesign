@@ -20,7 +20,11 @@ const PlaybackBar = () => {
   const {
     seekBar,
     seekBg,
+    volume,
+    handleVolumeChange,
     playStatus,
+    repeatStatus,
+    repeat,
     play,
     pause,
     track,
@@ -54,7 +58,17 @@ const PlaybackBar = () => {
             )}
           </p>
           <BiSkipNext onClick={next} className="cursor-pointer" />
-          <IoRepeat className="cursor-pointer" />
+          {repeatStatus ? (
+            <IoRepeat
+              onClick={repeat}
+              className="cursor-pointer text-primary"
+            />
+          ) : (
+            <IoRepeat
+              onClick={repeat}
+              className="cursor-pointer text-neutral-500"
+            />
+          )}
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">
@@ -80,9 +94,19 @@ const PlaybackBar = () => {
         <IoWifiSharp className="cursor-pointer" />
         <div className="flex items-center w-[72px]">
           <IoVolumeOff className="cursor-pointer" />
-          <div className="w-full grow h-[3px] bg-neutral-400">
-            <hr className="h-[3px] w-1/3 border-none bg-primary cursor-pointer rounded-full" />
-          </div>
+          {/* <div className="w-full grow h-[3px] bg-neutral-400">
+            <hr className="h-[3px] w-0 border-none bg-primary cursor-pointer rounded-full" />
+          </div> */}{" "}
+          <input
+            id="volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01" // Memungkinkan kontrol volume yang halus
+            value={volume}
+            onChange={handleVolumeChange}
+            className="custom-range w-full h-[4px] bg-gray-300 rounded-lg appearance-none focus:outline-none"
+          />
         </div>
         <IoNewspaperSharp className="cursor-pointer" />
         <PiMicrophoneStage className="cursor-pointer" />
