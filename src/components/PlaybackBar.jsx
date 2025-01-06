@@ -17,7 +17,7 @@ import { PlayerContext } from "../context/PlayerContext";
 import { songsData } from "../assets/object/songsData";
 
 const PlaybackBar = () => {
-  const { seekBar, seekBg, playStatus, play, pause, track } =
+  const { seekBar, seekBg, playStatus, play, pause, track, time } =
     useContext(PlayerContext);
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
@@ -47,14 +47,18 @@ const PlaybackBar = () => {
           <IoRepeat className="cursor-pointer" />
         </div>
         <div className="flex gap-2 w-full items-center">
-          <p className="text-xs text-neutral-800">{track.duration}</p>
+          <p className="text-xs text-neutral-800">
+            {time.currentTime.minute}:{time.currentTime.second}
+          </p>
           <div ref={seekBg} className="w-0 grow h-[3px] bg-neutral-500">
             <hr
               ref={seekBar}
               className="h-[3px] w-4/6 border-none bg-primary rounded-full cursor-pointer"
             />
           </div>
-          <p className="text-xs text-neutral-800">2.05</p>
+          <p className="text-xs text-neutral-800">
+            {time.totalTime.minute}:{time.totalTime.second}
+          </p>
         </div>
       </div>
       <div className="flex gap-2 text-primary h-full items-center text-base max-w-1/3">
