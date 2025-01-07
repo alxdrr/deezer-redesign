@@ -1,19 +1,27 @@
 import React, { useContext } from "react";
 import PlayButton from "../assets/icon/playbutton.svg";
 import { PlayerContext } from "../context/PlayerContext";
+import { IoPlayCircleSharp, IoPauseCircleSharp } from "react-icons/io5";
 const MiniSongCard = ({ title, artist, duration, image, id }) => {
-  const { playWithId } = useContext(PlayerContext);
+  const { playWithId, playStatus, track, pause } = useContext(PlayerContext);
   return (
-    <div
-      onClick={() => playWithId(id)}
-      className="flex gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group"
-    >
+    <div className="flex gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group">
       <div className="relative flex h-full gap-4 items-center">
         {/* Cover */}
         {/* Kode ketika di hover */}
-        <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 group-hover:z-30 transition-opacity duration-300">
           <img src={image} alt="Cover" className="brightness-50" />
-          <img src={PlayButton} alt="Cover" className="absolute" />
+          {playStatus && track.id === id ? (
+            <IoPauseCircleSharp
+              onClick={() => pause()}
+              className="text-primary bg-white rounded-full text-2xl cursor-pointer absolute"
+            />
+          ) : (
+            <IoPlayCircleSharp
+              onClick={() => playWithId(id)}
+              className="text-primary bg-white rounded-full text-2xl absolute cursor-pointer"
+            />
+          )}
         </div>
 
         {/* Kode ketika normal tidak di hover */}
