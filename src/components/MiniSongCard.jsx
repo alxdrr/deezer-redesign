@@ -5,10 +5,10 @@ import { IoPlayCircleSharp, IoPauseCircleSharp } from "react-icons/io5";
 const MiniSongCard = ({ title, artist, duration, image, id }) => {
   const { playWithId, playStatus, track, pause } = useContext(PlayerContext);
   return (
-    <div className="flex gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group">
+    <div className="flex relative gap-4 h-20 w-[32%] px-4 py-3 justify-between shadow-1 hover:bg-purple-100 transition-colors duration-150 cursor-pointer items-center group">
       <div className="relative flex h-full gap-4 items-center">
-        {/* Cover */}
         {/* Kode ketika di hover */}
+
         <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 group-hover:z-30 transition-opacity duration-300">
           <img src={image} alt="Cover" className="brightness-50" />
           {playStatus && track.id === id ? (
@@ -33,7 +33,13 @@ const MiniSongCard = ({ title, artist, duration, image, id }) => {
 
         {/* Playlist Information */}
         <div className="flex flex-col">
-          <p className="text-neutral-800 font-bold text-sm line-clamp-1">
+          <p
+            className={`${
+              playStatus && track.id === id
+                ? "text-primary"
+                : "text-neutral-800"
+            } font-bold text-sm line-clamp-1`}
+          >
             {title}
           </p>
           <p className="text-neutral-600 text-xs line-clamp-1">{artist}</p>

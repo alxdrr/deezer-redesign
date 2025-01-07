@@ -19,9 +19,14 @@ const Information = ({ isOpen }) => {
       transition={{ type: "tween", duration: 0.2 }}
     >
       <div className="flex relative flex-col bg-white rounded-lg w-full gap-2 px-3 py-3 shadow-2 transition-colors duration-150 cursor-pointer items-center">
-        <div className="relative w-full h-auto rounded-lg">
-          <img src={track.image} alt="Cover" className="z-10 rounded-lg" />
-          <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+        <div className="relative w-full h-auto flex flex-col gap-2 rounded-lg">
+          <h1 className="text-3xl text-neutral-800 text-center font-black">
+            Now Playing
+          </h1>
+          <div className="relative">
+            <img src={track.image} alt="Cover" className="z-10 rounded-lg" />
+            <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+          </div>
         </div>
 
         <div className="flex flex-col bottom-6 absolute left-6 w-auto">
