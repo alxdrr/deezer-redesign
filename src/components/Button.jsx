@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 
 const Button = ({ variant, link, title, scrollToId }) => {
-  let buttonClassName = `w-auto py-1.5 px-4 transition-all rounded-lg  active:scale-90 ${
+  let buttonClassName = `w-min py-1.5 px-6 transition-all rounded-lg  active:scale-90 ${
     variant == "outline"
       ? "bg-neutral-0 text-primary hover:bg-hover"
       : "bg-primary text-white hover:bg-[#1D2F99]"
