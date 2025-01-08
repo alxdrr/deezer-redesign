@@ -1,35 +1,42 @@
 import { motion } from "framer-motion";
 import React from "react";
 import Button from "../components/Button";
+import { div } from "framer-motion/client";
+import { FaCircleCheck } from "react-icons/fa6";
 const plans = [
   {
-    individual: {
-      name: "INDIVIDUAL",
-      price: "$11.99",
-      account: 1,
-      feature: [
-        "Ad-free",
-        "Download music",
-        "High Fidelity Sound",
-        "Unlimited and on demand",
-      ],
-    },
+    name: "INDIVIDUAL",
+    price: "$11.99",
+    account: 1,
+    feature: [
+      "Ad-free",
+      "Download music",
+      "High Fidelity Sound",
+      "Unlimited and on demand",
+    ],
   },
   {
-    family: {
-      name: "FAMILY",
-      price: "$19.99",
-      account: 6,
-      feature: [
-        "Ad-free",
-        "Download music",
-        "High Fidelity Sound",
-        "Unlimited and on demand",
-      ],
-    },
+    name: "FAMILY",
+    price: "$19.99",
+    account: 6,
+    feature: [
+      "Ad-free",
+      "Download music",
+      "High Fidelity Sound",
+      "Unlimited and on demand",
+    ],
   },
 ];
-
+const featureStyle = (feature) => {
+  return (
+    <>
+      <div className="flex gap-3 items-center">
+        <FaCircleCheck className="text-primary text-lg" />
+        <p className="font-bold">{feature}</p>
+      </div>
+    </>
+  );
+};
 const card = (index, name, account, feature, price) => {
   return (
     <>
@@ -44,15 +51,32 @@ const card = (index, name, account, feature, price) => {
         }}
         viewport={{ once: true }}
         transition={{ delay: 0.7 * index }}
-        className="drop-shadow-md md:max-w-60 lg:max-w-72 xl:max-w-sm bg-white rounded-xl px-4 py-6 | flex flex-col justify-between items-center gap-4 xl:gap-10"
+        className="drop-shadow-md w-auto bg-white rounded-xl px-4 py-6 flex flex-col justify-between items-center gap-4"
       >
-        <h1 className="text-xl xl:text-3xl lg:text-2xl text-secondary text-center font-black">
-          {name}
-        </h1>
-        <p className="text-sm lg:text-base xl:text-xl text-gray-700 text-center">
-          {account}
-        </p>
-        <p className="text-secondary font-medium">Learn More</p>
+        <div className="flex w-full justify-between gap-10 items-center">
+          <h1
+            className={`${
+              name == "INDIVIDUAL" ? "text-primary" : "text-[#FF673D]"
+            } text-xl xl:text-3xl lg:text-2xl text-secondary text-center font-black`}
+          >
+            {name}
+          </h1>
+          <p className="text-sm  text-gray-700 text-center">
+            {account} account
+          </p>
+        </div>
+        <div className="gap-0 w-full">
+          <p className="text-neutral-800 font-medium">1 month free</p>
+          <p className="text-neutral-500 w-auto">then {price}/month</p>
+        </div>
+        <div className="flex w-full flex-col gap-3">
+          {feature.map((desc, index) => featureStyle(desc))}
+        </div>
+        <Button
+          variant={"primary"}
+          type={"clickable"}
+          title={"Try for free"}
+        ></Button>
       </motion.div>
     </>
   );
@@ -103,7 +127,7 @@ const Plans = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         id="about"
-        className="bg-primary w-full items-center justify-center flex flex-col h-auto my-16 gap-8 md:gap-0 lg:py-10 px-4 lg:px-8 xl:px-0"
+        className="bg-primary w-full items-center justify-center flex flex-col h-auto py-16 gap-16"
       >
         <div className="text-white text-3xl md:text-6xl lg:text-7xl font-black py-4 text-center flex flex-col gap-8">
           <p>Find The Perfect Plan</p>
