@@ -1,8 +1,11 @@
 // import { Link } from "react-router-dom";
 
-const Button = ({ link, title, scrollToId }) => {
-  let buttonClassName =
-    "w-auto py-1.5 px-4 bg-neutral-0 text-primary transition-all rounded-lg hover:bg-hover active:scale-90";
+const Button = ({ variant, link, title, scrollToId }) => {
+  let buttonClassName = `w-auto py-1.5 px-4 transition-all rounded-lg  active:scale-90 ${
+    variant == "outline"
+      ? "bg-neutral-0 text-primary hover:bg-hover"
+      : "bg-primary text-white hover:bg-[#1D2F99]"
+  }`;
   const handleClick = () => {
     // Scroll to the specified ID when the button is clicked
     if (scrollToId) {
