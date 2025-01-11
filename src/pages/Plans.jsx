@@ -145,18 +145,6 @@ const Plans = () => {
       </motion.div>
       {/* Services Section */}
 
-      {/* Recent Projects Section */}
-      <div className="w-full max-w-screen-xl items-center flex flex-col h-auto my-16 mx-auto lg:py-10 px-4 gap-8 xl:gap-10 lg:px-8 xl:px-0">
-        <section className="flex justify-center items-center flex-col gap-4">
-          <h1 className="text-primary text-center text-xl md:text-start md:text-2xl lg:text-4xl max-w-xl font-black">
-            Recent Projects
-          </h1>
-          <p className="lg:text-base xl:text-xl text-center text-gray-700">
-            Browse through our portfolio of completed projects.
-          </p>
-        </section>
-        <section className="flex flex-col gap-6 md:gap-0 xs:flex-row justify-between w-full xl:px-16"></section>
-      </div>
       {/* FAQ Section */}
       <motion.div
         transition={{ duration: 1, type: "tween" }}

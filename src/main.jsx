@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App.jsx";
 import Plans from "./pages/Plans";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import PlayerContextProvider from "./context/PlayerContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<Plans />} />
           <Route path="/home" element={<App />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </PlayerContextProvider>
     </BrowserRouter>

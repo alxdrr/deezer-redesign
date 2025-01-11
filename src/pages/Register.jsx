@@ -14,8 +14,11 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [gender, setGender] = useState("male");
+  const [dob, setDob] = useState("");
   //   const navigate = useNavigate();
 
   function togglePasswordVisibility() {
@@ -55,11 +58,13 @@ const Login = () => {
       <Navbar />
       <section
         id="login"
-        className="login flex flex-col justify-center pt-16 relative items-center h-dvh"
+        className="login flex flex-col justify-center pt-24 relative items-center h-auto"
       >
         <div className="w-full md:w-3/4 xl:w-1/2 px-8">
           <div className="w-full p-8 flex flex-col justify-center items-center gap-8">
-            <p className="text-5xl text-neutral-800 font-black">Log in</p>
+            <p className="text-5xl text-neutral-800 font-black">
+              Create an account
+            </p>
             <form
               method="post"
               className="mt-2 flex flex-col gap-8 w-3/4"
@@ -83,6 +88,46 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="off"
                   />
+                </div>
+                <div className="flex flex-col gap-4">
+                  <label
+                    className="text-base font-bold text-neutral-800"
+                    htmlFor="birthdate"
+                  >
+                    Date of birth
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    name="birthdate"
+                    autoComplete="off"
+                    id="birthdate"
+                    className="bg-transparent border-2 py-3 px-5 rounded-lg text-xs border-based-1 outline-offset-0 text-neutral-500 focus:outline-primary focus:outline-2 focus:outline-offset-2 transition-all duration-200 appearance-none web"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                  />
+                </div>
+                <div className="flex flex-col gap-4">
+                  <label
+                    className="text-base font-bold text-neutral-800"
+                    htmlFor="degree"
+                  >
+                    Gender
+                  </label>
+                  <select
+                    name="degree"
+                    required
+                    id="degree"
+                    autoComplete="off"
+                    className="bg-transparent border-2 py-3  px-5 rounded-lg text-sm border-based-1 outline-offset-0 text-neutral-800 focus:outline-primary focus:outline-2 focus:outline-offset-2 transition-all duration-200 focus:bg-category-5 focus:border-based-1 appearance-none"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <option selected value="male">
+                      Male
+                    </option>
+                    <option value="female">Female</option>
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label
@@ -117,14 +162,37 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col lg:flex-row gap-3 justify-end items-center">
-                  <div className="inline-flex items-center">
-                    <label
-                      className="text-neutral-800 text-center text-base cursor-pointer"
-                      htmlFor="check"
+                <div className="flex flex-col gap-2">
+                  <label
+                    className="text-base font-bold text-neutral-800"
+                    htmlFor="password"
+                  >
+                    Confirm Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={isPasswordVisible ? "text" : "password"}
+                      name="password"
+                      id="password"
+                      className="w-full bg-transparent border-2 py-3 px-5 rounded-lg text-sm border-based-1 outline-offset-0 text-neutral-800 focus:outline-primary focus:outline-2 focus:outline-offset-2 transition-all duration-200"
+                      placeholder="Masukkan Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <div
+                      className="absolute inset-y-0 right-0 flex items-center px-4 text-2xl text-neutral-800"
+                      onClick={togglePasswordVisibility}
                     >
-                      Forgotten Passowrd?
-                    </label>
+                      {isPasswordVisible ? (
+                        <p>
+                          <IoEyeOutline />
+                        </p>
+                      ) : (
+                        <p>
+                          <IoEyeOffOutline />
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
                 {errorMessage && (
@@ -154,10 +222,10 @@ const Login = () => {
                 <img src={apple} className="w-14 h-14 cursor-pointer" alt="" />
               </div>
               <p className="text-neutral-800 text-center text-base">
-                Not registered on Sonata yet?{" "}
+                Registered on Sonata?{" "}
                 <span>
-                  <Link className="text-primary" to={"/register"}>
-                    Sign Up
+                  <Link className="text-primary" to={"/login"}>
+                    Log In
                   </Link>
                 </span>
               </p>
