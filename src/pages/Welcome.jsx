@@ -1,4 +1,4 @@
-import React, { useState, useNavigate } from "react";
+import React, { useState, useNavigate, useEffect } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router";
@@ -10,13 +10,87 @@ import google from "../assets/image/google.png";
 import Button from "../components/Button";
 import Loader from "../assets/icon/Ring.svg";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [query, setQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   //   const navigate = useNavigate();
+
+  const [token, setToken] = useState(null);
+  const client_id = "465d0f050b12484697177ff5238d3226"; // Replace with your Client ID
+  const client_secret = "be7cdee0d3f14182accbad398e70f645"; // Replace with your Client Secret
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const authOptions = {
+        url: "https://accounts.spotify.com/api/token",
+        headers: {
+          Authorization: "Basic " + btoa(`${client_id}:${client_secret}`),
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data: new URLSearchParams({
+          grant_type: "client_credentials",
+        }),
+      };
+
+      try {
+        const response = await axios.post(authOptions.url, authOptions.data, {
+          headers: authOptions.headers,
+        });
+        if (response.status === 200) {
+          setToken(response.data.access_token);
+        }
+      } catch (error) {
+        console.error("Error fetching token", error);
+      }
+    };
+
+    fetchToken();
+  }, [client_id, client_secret]);
+  const [query, setQuery] = useState("");
+  const [artists, setArtists] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const handleSearch = async () => {
+    setError(null); // Reset error state
+    setLoading(true); // Set loading state
+
+    try {
+      const results = await searchArtists(query, token);
+      setArtists(results);
+    } catch (err) {
+      setError(err.message); // Simpan pesan error
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
+
+  const searchArtists = async (query, accessToken) => {
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+          query
+        )}&type=artist`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data.artists.items;
+    } catch (error) {
+      console.error("Failed to search artists:", error.message);
+      throw error; // Propagate the error for the caller to handle
+    }
+  };
 
   return (
     <div>
@@ -42,18 +116,24 @@ const Login = () => {
                       <button
                         type="submit"
                         className="p-1 focus:outline-none focus:shadow-outline"
+                        onClick={handleSearch}
+                        disabled={loading}
                       >
-                        <svg
-                          fill="none"
-                          stroke="#ADB5BD"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                          className="w-6 h-6"
-                        >
-                          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                        {loading ? (
+                          <img src={Loader} alt="" />
+                        ) : (
+                          <svg
+                            fill="none"
+                            stroke="#ADB5BD"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                            className="w-6 h-6"
+                          >
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                          </svg>
+                        )}
                       </button>
                     </span>
                     <input
@@ -88,34 +168,28 @@ const Login = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4 w-full items-center">
-              <p className="text-2xl text-primary font-black">
+              {/* <p className="text-2xl text-primary font-black">
                 Recommended Artist
-              </p>
-              <div className="flex gap-4 w-full items-center justify-center">
-                <div className="flex flex-col gap-4 items-center justify-center">
-                  <img src={avatar} alt="" className="rounded-full w-32" />
-                  <p className="text-base font-normal text-neutral-800">
-                    Artist 1
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 items-center justify-center">
-                  <img src={avatar} alt="" className="rounded-full w-32" />
-                  <p className="text-base font-normal text-neutral-800">
-                    Artist 1
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 items-center justify-center">
-                  <img src={avatar} alt="" className="rounded-full w-32" />
-                  <p className="text-base font-normal text-neutral-800">
-                    Artist 1
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 items-center justify-center">
-                  <img src={avatar} alt="" className="rounded-full w-32" />
-                  <p className="text-base font-normal text-neutral-800">
-                    Artist 1
-                  </p>
-                </div>
+              </p> */}
+
+              <div className="flex gap-4 w-full flex-wrap items-center justify-center">
+                {artists.map((artist) => (
+                  <div
+                    key="id"
+                    className="flex flex-col gap-4 items-center justify-center"
+                  >
+                    <img
+                      src={
+                        artist.images.length > 0 ? artist.images[0].url : avatar
+                      }
+                      alt={artist.name}
+                      className="rounded-full w-40 h-40 object-fit"
+                    />
+                    <p className="text-base font-normal text-neutral-800">
+                      {artist.name}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
             <Button title={"Continue"} link={"/home"}></Button>
