@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router";
 import Button from "../components/Button";
 import { div } from "framer-motion/client";
+import logo from "../assets/image/LogoBlack.png";
 import { FaCircleCheck } from "react-icons/fa6";
 const plans = [
   {
@@ -30,7 +32,7 @@ const plans = [
 const featureStyle = (feature) => {
   return (
     <>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center text-neutral-800">
         <FaCircleCheck className="text-primary text-lg" />
         <p className="font-bold">{feature}</p>
       </div>
@@ -51,7 +53,7 @@ const card = (index, name, account, feature, price) => {
         }}
         viewport={{ once: true }}
         transition={{ delay: 0.7 * index }}
-        className="drop-shadow-md w-auto bg-white rounded-xl px-4 py-6 flex flex-col justify-between items-center gap-4"
+        className="drop-shadow-md w-96 bg-white rounded-xl px-6 py-6 flex flex-col justify-between items-center gap-4"
       >
         <div className="flex w-full justify-between gap-10 items-center">
           <h1
@@ -85,6 +87,31 @@ const Plans = () => {
   return (
     <>
       {/* Navbar & Hero */}
+      <section id="navbar">
+        <div className="fixed w-screen bg-white backdrop-blur-sm mx-auto px-0 md:px-4 lg:px-32 py-4 border-b-2 border-based-1 z-20">
+          <div className="hidden lg:flex justify-between items-center z-10">
+            <Link className="z-10" to={"/"}>
+              <img className="h-10" src={logo} alt="" />
+            </Link>
+            <div className="flex justify-between gap-14  text-neutral-800">
+              <Link className="z-10 hover:text-primary" to={"/"}>
+                Plans
+              </Link>
+              <Link className="z-10 hover:text-primary" to={"/explore"}>
+                Features
+              </Link>
+              <Link className="z-10 hover:text-primary" to={"/about-us"}>
+                Music
+              </Link>
+            </div>
+            <div className="flex gap-2">
+              <Button link={"/home"} title={"Log in"}></Button>
+              <Button link={"/home"} title={"Sign up"}></Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="w-full bg-white h-dvh flex flex-col justify-center">
         <motion.div
           layout
@@ -129,7 +156,7 @@ const Plans = () => {
         id="about"
         className="bg-primary w-full items-center justify-center flex flex-col h-auto py-16 gap-16"
       >
-        <div className="text-white text-3xl md:text-6xl lg:text-7xl font-black py-4 text-center flex flex-col gap-8">
+        <div className="text-white text-6xl font-black py-4 text-center flex flex-col gap-8">
           <p>Find The Perfect Plan</p>
           <p>Match Your Style!</p>
         </div>

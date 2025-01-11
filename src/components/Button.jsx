@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Button = ({ variant, link, title, scrollToId }) => {
   let buttonClassName = `py-1.5 px-6 transition-all rounded-lg  active:scale-90 ${

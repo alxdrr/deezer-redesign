@@ -1,12 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App.jsx";
+import Plans from "./pages/Plans";
 import PlayerContextProvider from "./context/PlayerContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <PlayerContextProvider>
-      <App />
-    </PlayerContextProvider>
+    <BrowserRouter>
+      <PlayerContextProvider>
+        <Routes>
+          <Route path="/" element={<Plans />} />
+          <Route path="/home" element={<App />} />
+        </Routes>
+      </PlayerContextProvider>
+    </BrowserRouter>
   </StrictMode>
 );
