@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import { div } from "framer-motion/client";
+import Accordion from "../components/Accordion";
 import logo from "../assets/image/LogoBlack.png";
 import { FaCircleCheck } from "react-icons/fa6";
 const plans = [
@@ -161,6 +162,24 @@ const Plans = () => {
             Find answers to common questions about our services and processes.
           </p>
         </section>
+        <div className="flex flex-col justify-center gap-3 items-center w-full">
+          <Accordion
+            title="What are the advantages of a Sonata Premium subscription?"
+            content="Our services are tailored for a diverse range of industries. Whether you’re a startup, SME, or a large corporation, we provide customized solutions to meet your specific needs in web, app, and system development. Our expertise is designed to support businesses in any sector to enhance their digital presence and operational efficiency."
+          ></Accordion>
+          <Accordion
+            title="What does offline listening mean?"
+            content="Our services are tailored for a diverse range of industries. Whether you’re a startup, SME, or a large corporation, we provide customized solutions to meet your specific needs in web, app, and system development. Our expertise is designed to support businesses in any sector to enhance their digital presence and operational efficiency."
+          ></Accordion>
+          <Accordion
+            title="How many devices can be paired to one Sonata Premium account?"
+            content="Our services are tailored for a diverse range of industries. Whether you’re a startup, SME, or a large corporation, we provide customized solutions to meet your specific needs in web, app, and system development. Our expertise is designed to support businesses in any sector to enhance their digital presence and operational efficiency."
+          ></Accordion>
+          <Accordion
+            title="What is the difference between a Deezer Premium account and Deezer Family account?"
+            content="Our services are tailored for a diverse range of industries. Whether you’re a startup, SME, or a large corporation, we provide customized solutions to meet your specific needs in web, app, and system development. Our expertise is designed to support businesses in any sector to enhance their digital presence and operational efficiency."
+          ></Accordion>
+        </div>
       </motion.div>
       {/* CTA Section */}
 
