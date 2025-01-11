@@ -4,6 +4,7 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App.jsx";
 import Plans from "./pages/Plans";
+import Login from "./pages/Login";
 import PlayerContextProvider from "./context/PlayerContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -12,6 +13,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<Plans />} />
           <Route path="/home" element={<App />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </PlayerContextProvider>
     </BrowserRouter>
