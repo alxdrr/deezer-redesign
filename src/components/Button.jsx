@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const Button = ({ variant, link, title, scrollToId }) => {
   let buttonClassName = `py-1.5 px-6 transition-all rounded-lg  active:scale-90 ${
     variant == "outline"
-      ? "bg-neutral-0 text-primary hover:bg-hover"
+      ? "bg-neutral-0 text-primary hover:bg-hover border border-primary"
       : "bg-primary text-white hover:bg-[#1D2F99]"
   }`;
   const handleClick = () => {

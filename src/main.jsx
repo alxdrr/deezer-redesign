@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Plans from "./pages/Plans";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Welcome from "./pages/Welcome";
 import PlayerContextProvider from "./context/PlayerContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/home" element={<App />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/welcome" element={<Welcome />} />
         </Routes>
       </PlayerContextProvider>
     </BrowserRouter>
