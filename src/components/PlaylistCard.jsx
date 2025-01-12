@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "../assets/album-cover/Album6.jpg";
 import PlayButton from "../assets/icon/playbutton.svg";
 
-const AlbumCard = ({ name, cover, artist, released }) => {
+const PlaylistCard = ({ name, cover, owner, total }) => {
   return (
     <div className="flex relative flex-col rounded-lg min-h-64 gap-2 w-52 px-3 py-3 shadow-2 transition-colors duration-150 cursor-pointer items-center group">
       {/* Kode ketika di hover */}
@@ -12,14 +12,16 @@ const AlbumCard = ({ name, cover, artist, released }) => {
       </div>
       {/* Kode ketika normal tidak di hover */}
       <img src={cover} alt="Cover" className="w-full rounded-lg group-hover:opacity-0 z-10 transition-opacity duration-300" />
+      {/* <img src={Avatar} alt="Cover" className="w-full rounded-lg" /> */}
       {/* Title */}
       <div className="flex flex-col justify-start items-start w-full">
-        <p className="text-neutral-800 text-sm font-black">{name}</p>
-        <p className="text-neutral-600 text-sm line-clamp-1">{artist.map((artist) => artist.name).join(", ")}</p>
-        <p className="text-neutral-600 text-xs line-clamp-1">{released}</p>
+        {" "}
+        <p className="text-neutral-800 text-sm font-black line-clamp-1">{name}</p>
+        <p className="text-neutral-600 text-sm line-clamp-1">{owner}</p>
+        <p className="text-neutral-600 text-xs">{total} Tracks</p>
       </div>
     </div>
   );
 };
 
-export default AlbumCard;
+export default PlaylistCard;
