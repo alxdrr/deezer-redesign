@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Avatar from "../assets/image/profile.jpg";
 import Loader from "../assets/icon/Ring.svg";
-import MiniSongCard from "../components/MiniSongCard";
 import { FaRegHeart, FaRegShareFromSquare, FaEllipsisVertical } from "react-icons/fa6";
-import DailyPlaylistCard from "../components/DailyPlaylistCard";
-import { songsData } from "../assets/object/songsData";
 import PlayButton from "../assets/icon/playbutton.svg";
 import Plus from "../assets/icon/plusSquare.svg";
 

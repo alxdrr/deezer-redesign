@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import Accordion from "../components/Accordion";
@@ -52,7 +51,7 @@ const card = (index, name, account, feature, price) => {
           <p className="text-neutral-800 font-medium">1 month free</p>
           <p className="text-neutral-500 w-auto">then {price}/month</p>
         </div>
-        <div className="flex w-full flex-col gap-3">{feature.map((desc, index) => featureStyle(desc))}</div>
+        <div className="flex w-full flex-col gap-3">{feature.map((desc) => featureStyle(desc))}</div>
         <Button variant={"primary"} type={"clickable"} title={"Try for free"}></Button>
       </motion.div>
     </>

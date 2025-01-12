@@ -1,38 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FaRegHeart, FaPlus } from "react-icons/fa6";
 import { PiMicrophoneStage } from "react-icons/pi";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
-import {
-  IoPlayCircleSharp,
-  IoPauseCircleSharp,
-  IoWifiSharp,
-  IoShuffleOutline,
-  IoRepeat,
-  IoListSharp,
-  IoVolumeOff,
-  IoNewspaperSharp,
-  IoOptions,
-} from "react-icons/io5";
+import { IoPlayCircleSharp, IoPauseCircleSharp, IoWifiSharp, IoShuffleOutline, IoRepeat, IoListSharp, IoVolumeOff, IoNewspaperSharp, IoOptions } from "react-icons/io5";
 import { PlayerContext } from "../context/PlayerContext";
-import { songsData } from "../assets/object/songsData";
 
 const PlaybackBar = ({ drawer }) => {
-  const {
-    seekBar,
-    seekBg,
-    volume,
-    handleVolumeChange,
-    playStatus,
-    repeatStatus,
-    repeat,
-    play,
-    pause,
-    track,
-    time,
-    previous,
-    next,
-    seekSong,
-  } = useContext(PlayerContext);
+  const { seekBar, seekBg, volume, handleVolumeChange, playStatus, repeatStatus, repeat, play, pause, track, time, previous, next, seekSong } = useContext(PlayerContext);
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
       <div className="flex gap-4 h-full w-auto duration-150 items-center">
@@ -51,38 +25,17 @@ const PlaybackBar = ({ drawer }) => {
           <IoShuffleOutline className="cursor-pointer" />
           <BiSkipPrevious onClick={previous} className="cursor-pointer" />
           <p className="text-3xl">
-            {playStatus ? (
-              <IoPauseCircleSharp onClick={pause} className="cursor-pointer" />
-            ) : (
-              <IoPlayCircleSharp onClick={play} className="cursor-pointer" />
-            )}
+            {playStatus ? <IoPauseCircleSharp onClick={pause} className="cursor-pointer" /> : <IoPlayCircleSharp onClick={play} className="cursor-pointer" />}
           </p>
           <BiSkipNext onClick={next} className="cursor-pointer" />
-          {repeatStatus ? (
-            <IoRepeat
-              onClick={repeat}
-              className="cursor-pointer text-primary"
-            />
-          ) : (
-            <IoRepeat
-              onClick={repeat}
-              className="cursor-pointer text-neutral-500"
-            />
-          )}
+          {repeatStatus ? <IoRepeat onClick={repeat} className="cursor-pointer text-primary" /> : <IoRepeat onClick={repeat} className="cursor-pointer text-neutral-500" />}
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">
             {time.currentTime.minute}:{time.currentTime.second}
           </p>
-          <div
-            ref={seekBg}
-            onClick={seekSong}
-            className="w-0 grow h-[3px] bg-neutral-500"
-          >
-            <hr
-              ref={seekBar}
-              className="h-[3px] w-0 border-none bg-primary rounded-full cursor-pointer"
-            />
+          <div ref={seekBg} onClick={seekSong} className="w-0 grow h-[3px] bg-neutral-500">
+            <hr ref={seekBar} className="h-[3px] w-0 border-none bg-primary rounded-full cursor-pointer" />
           </div>
           <p className="text-xs text-neutral-800">
             {time.totalTime.minute}:{time.totalTime.second}

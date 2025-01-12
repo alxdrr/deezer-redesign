@@ -1,5 +1,4 @@
-import React, { useState, useNavigate, useEffect } from "react";
-import { Link } from "react-router";
+import { useState, useNavigate, useEffect } from "react";
 import avatar from "../assets/image/PlaylistCover.png";
 import check from "../assets/icon/check.svg";
 import Button from "../components/Button";
@@ -51,9 +50,7 @@ const Login = () => {
     setMyArtists((prevArtists) => [...prevArtists, artist]);
   };
   const removeArtist = (artists) => {
-    setMyArtists((oldValues) =>
-      oldValues.filter((myArtists) => myArtists !== artists)
-    );
+    setMyArtists((oldValues) => oldValues.filter((myArtists) => myArtists !== artists));
   };
   const handleSearch = async () => {
     setError(null); // Reset error state
@@ -71,16 +68,11 @@ const Login = () => {
 
   const searchArtists = async (query, accessToken) => {
     try {
-      const response = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-          query
-        )}&type=artist&limit=7`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist&limit=7`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -97,42 +89,23 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <section
-        id="login"
-        className="login flex flex-col justify-center pt-24 relative items-center h-auto"
-      >
+      <section id="login" className="login flex flex-col justify-center pt-24 relative items-center h-auto">
         <div className="w-full px-8">
           <div className="w-full p-8 flex flex-col justify-center items-center gap-12">
             <div className="flex flex-col gap-2 items-center">
               <p className="text-5xl text-neutral-800 font-black">Welcome</p>
-              <p className="text-base font-normal text-neutral-800">
-                Choose your favorite artist for more personalised
-                recommendations
-              </p>
+              <p className="text-base font-normal text-neutral-800">Choose your favorite artist for more personalised recommendations</p>
             </div>
             <div className="flex flex-col gap-6 w-full items-center">
               <form method="post" className="mt-2 flex flex-col gap-8 w-2/6">
                 <div className="w-full flex flex-col gap-5">
                   <div className="flex relative flex-col gap-2">
                     <span className="absolute left-0 flex inset-y-0 items-center pl-2">
-                      <button
-                        type="submit"
-                        className="p-1 focus:outline-none focus:shadow-outline"
-                        onClick={handleSearch}
-                        disabled={loading}
-                      >
+                      <button type="submit" className="p-1 focus:outline-none focus:shadow-outline" onClick={handleSearch} disabled={loading}>
                         {loading ? (
                           <img src={Loader} alt="" />
                         ) : (
-                          <svg
-                            fill="none"
-                            stroke="#ADB5BD"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            className="w-6 h-6"
-                          >
+                          <svg fill="none" stroke="#ADB5BD" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-6 h-6">
                             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                           </svg>
                         )}
@@ -149,11 +122,7 @@ const Login = () => {
                       autoComplete="off"
                     />
                   </div>
-                  {errorMessage && (
-                    <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">
-                      {errorMessage}
-                    </p>
-                  )}
+                  {errorMessage && <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">{errorMessage}</p>}
                 </div>
               </form>
               <div className="flex w-full gap-4 items-center justify-center">
@@ -175,38 +144,21 @@ const Login = () => {
                   <div
                     key={artist.id}
                     className="flex flex-col gap-4 items-center justify-center"
-                    onClick={
-                      myArtists.includes(artist.name)
-                        ? () => removeArtist(artist.name)
-                        : () => addArtist(artist.name)
-                    }
+                    onClick={myArtists.includes(artist.name) ? () => removeArtist(artist.name) : () => addArtist(artist.name)}
                   >
                     <div className="relative">
                       <img
-                        src={
-                          artist.images.length > 0
-                            ? artist.images[0].url
-                            : avatar
-                        }
+                        src={artist.images.length > 0 ? artist.images[0].url : avatar}
                         alt={artist.name}
-                        className={`rounded-full w-40 h-40 object-fit transition-all duration-300 ${
-                          myArtists.includes(artist.name)
-                            ? "brightness-50"
-                            : "brightness-100"
-                        }`}
+                        className={`rounded-full w-40 h-40 object-fit transition-all duration-300 ${myArtists.includes(artist.name) ? "brightness-50" : "brightness-100"}`}
                       />
                       {myArtists.includes(artist.name) ? (
-                        <img
-                          src={check}
-                          className="absolute w-12 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                        />
+                        <img src={check} className="absolute w-12 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                       ) : (
                         <p className="hidden"></p>
                       )}
                     </div>
-                    <p className="text-base font-normal text-neutral-800">
-                      {artist.name}
-                    </p>
+                    <p className="text-base font-normal text-neutral-800">{artist.name}</p>
                   </div>
                 ))}
               </div>

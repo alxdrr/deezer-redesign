@@ -1,4 +1,3 @@
-import React from "react";
 import Avatar from "../assets/image/profile.jpg";
 import MiniSongCard from "../components/MiniSongCard";
 import DailyPlaylistCard from "../components/DailyPlaylistCard";
@@ -11,24 +10,13 @@ const home = () => {
         <div className="flex px-3 py-4 gap-8 items-center">
           <img src={Avatar} alt="" className="rounded-full w-32" />
           <div className="flex flex-col">
-            <p className="text-6xl text-neutral-800 font-black">
-              Good Evening Zelig
-            </p>
-            <p className="text-neutral-500">
-              Let's explore some new tracks here
-            </p>
+            <p className="text-6xl text-neutral-800 font-black">Good Evening Zelig</p>
+            <p className="text-neutral-500">Let's explore some new tracks here</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-4">
           {songsData.map((item, index) => (
-            <MiniSongCard
-              key={index}
-              title={item.name}
-              artist={item.artist}
-              duration={item.duration}
-              image={item.image}
-              id={item.id}
-            />
+            <MiniSongCard key={index} title={item.name} artist={item.artist} duration={item.duration} image={item.image} id={item.id} />
           ))}
         </div>
       </div>

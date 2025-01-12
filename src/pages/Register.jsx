@@ -1,4 +1,4 @@
-import React, { useState, useNavigate } from "react";
+import { useState, useNavigate } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router";
@@ -55,26 +55,14 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <section
-        id="login"
-        className="login flex flex-col justify-center pt-24 relative items-center h-auto"
-      >
+      <section id="login" className="login flex flex-col justify-center pt-24 relative items-center h-auto">
         <div className="w-full md:w-3/4 xl:w-1/2 px-8">
           <div className="w-full p-8 flex flex-col justify-center items-center gap-8">
-            <p className="text-5xl text-neutral-800 font-black">
-              Create an account
-            </p>
-            <form
-              method="post"
-              className="mt-2 flex flex-col gap-8 w-3/4"
-              onSubmit={handleSubmit}
-            >
+            <p className="text-5xl text-neutral-800 font-black">Create an account</p>
+            <form method="post" className="mt-2 flex flex-col gap-8 w-3/4" onSubmit={handleSubmit}>
               <div className="w-full flex flex-col gap-5">
                 <div className="flex flex-col gap-2">
-                  <label
-                    className="text-base font-bold text-neutral-800"
-                    htmlFor="email"
-                  >
+                  <label className="text-base font-bold text-neutral-800" htmlFor="email">
                     Email
                   </label>
                   <input
@@ -89,10 +77,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-4">
-                  <label
-                    className="text-base font-bold text-neutral-800"
-                    htmlFor="birthdate"
-                  >
+                  <label className="text-base font-bold text-neutral-800" htmlFor="birthdate">
                     Date of birth
                   </label>
                   <input
@@ -107,10 +92,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-4">
-                  <label
-                    className="text-base font-bold text-neutral-800"
-                    htmlFor="degree"
-                  >
+                  <label className="text-base font-bold text-neutral-800" htmlFor="degree">
                     Gender
                   </label>
                   <select
@@ -129,10 +111,7 @@ const Login = () => {
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label
-                    className="text-base font-bold text-neutral-800"
-                    htmlFor="password"
-                  >
+                  <label className="text-base font-bold text-neutral-800" htmlFor="password">
                     Password
                   </label>
                   <div className="relative">
@@ -145,10 +124,7 @@ const Login = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                    <div
-                      className="absolute inset-y-0 right-0 flex items-center px-4 text-2xl text-neutral-800"
-                      onClick={togglePasswordVisibility}
-                    >
+                    <div className="absolute inset-y-0 right-0 flex items-center px-4 text-2xl text-neutral-800" onClick={togglePasswordVisibility}>
                       {isPasswordVisible ? (
                         <p>
                           <IoEyeOutline />
@@ -162,10 +138,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label
-                    className="text-base font-bold text-neutral-800"
-                    htmlFor="password"
-                  >
+                  <label className="text-base font-bold text-neutral-800" htmlFor="password">
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -178,10 +151,7 @@ const Login = () => {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <div
-                      className="absolute inset-y-0 right-0 flex items-center px-4 text-2xl text-neutral-800"
-                      onClick={togglePasswordVisibility}
-                    >
+                    <div className="absolute inset-y-0 right-0 flex items-center px-4 text-2xl text-neutral-800" onClick={togglePasswordVisibility}>
                       {isPasswordVisible ? (
                         <p>
                           <IoEyeOutline />
@@ -194,29 +164,17 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                {errorMessage && (
-                  <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">
-                    {errorMessage}
-                  </p>
-                )}
+                {errorMessage && <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">{errorMessage}</p>}
               </div>
 
               <Button type={"submit"} title={"Log in"}>
-                {isLoading ? (
-                  <img src={Loader} className="mx-auto" />
-                ) : (
-                  <p>Login</p>
-                )}
+                {isLoading ? <img src={Loader} className="mx-auto" /> : <p>Login</p>}
               </Button>
             </form>
             <div className="flex flex-col gap-4 items-center">
               <p className="text-neutral-800 text-center text-base">or</p>
               <div className="flex gap-4">
-                <img
-                  src={facebook}
-                  className="w-14 h-14 cursor-pointer"
-                  alt=""
-                />
+                <img src={facebook} className="w-14 h-14 cursor-pointer" alt="" />
                 <img src={google} className="w-14 h-14 cursor-pointer" alt="" />
                 <img src={apple} className="w-14 h-14 cursor-pointer" alt="" />
               </div>
