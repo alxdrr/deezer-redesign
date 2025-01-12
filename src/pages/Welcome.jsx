@@ -1,24 +1,14 @@
 import React, { useState, useNavigate, useEffect } from "react";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import logo from "../assets/image/LogoBlack.png";
-import apple from "../assets/image/apple.png";
-import facebook from "../assets/image/facebook.png";
 import avatar from "../assets/image/PlaylistCover.png";
-import { FaCircleCheck } from "react-icons/fa6";
-import google from "../assets/image/google.png";
 import check from "../assets/icon/check.svg";
 import Button from "../components/Button";
 import Loader from "../assets/icon/Ring.svg";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { img } from "framer-motion/client";
 
 const Login = () => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   //   const navigate = useNavigate();
 
   const [token, setToken] = useState(null);

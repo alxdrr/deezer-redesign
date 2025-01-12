@@ -32,7 +32,7 @@ const sidebar = () => {
             month free
           </p>
           <Button
-            variant={"primary"}
+            variant={"outline"}
             type={"clickable"}
             title={"Subscirbe"}
           ></Button>
@@ -40,7 +40,7 @@ const sidebar = () => {
       </div>
       <div id="container" className="flex flex-col gap-2 py-2 grow">
         <Button
-          variant={"primary"}
+          variant={"outline"}
           type={"clickable"}
           title={"New Playlist"}
         ></Button>

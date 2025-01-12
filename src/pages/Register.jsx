@@ -2,7 +2,6 @@ import React, { useState, useNavigate } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import logo from "../assets/image/LogoBlack.png";
 import apple from "../assets/image/apple.png";
 import facebook from "../assets/image/facebook.png";
 import google from "../assets/image/google.png";

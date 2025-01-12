@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/playlist" element={<App />} />
         </Routes>
       </PlayerContextProvider>
     </BrowserRouter>

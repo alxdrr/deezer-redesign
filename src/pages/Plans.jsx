@@ -3,9 +3,7 @@ import React from "react";
 import { Link } from "react-router";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
-import { div } from "framer-motion/client";
 import Accordion from "../components/Accordion";
-import logo from "../assets/image/LogoBlack.png";
 import { FaCircleCheck } from "react-icons/fa6";
 const plans = [
   {
