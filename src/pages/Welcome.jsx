@@ -6,11 +6,14 @@ import logo from "../assets/image/LogoBlack.png";
 import apple from "../assets/image/apple.png";
 import facebook from "../assets/image/facebook.png";
 import avatar from "../assets/image/PlaylistCover.png";
+import { FaCircleCheck } from "react-icons/fa6";
 import google from "../assets/image/google.png";
+import check from "../assets/icon/check.svg";
 import Button from "../components/Button";
 import Loader from "../assets/icon/Ring.svg";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { img } from "framer-motion/client";
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -53,6 +56,15 @@ const Login = () => {
   const [artists, setArtists] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [myArtists, setMyArtists] = useState([]);
+  const addArtist = (artist) => {
+    setMyArtists((prevArtists) => [...prevArtists, artist]);
+  };
+  const removeArtist = (artists) => {
+    setMyArtists((oldValues) =>
+      oldValues.filter((myArtists) => myArtists !== artists)
+    );
+  };
   const handleSearch = async () => {
     setError(null); // Reset error state
     setLoading(true); // Set loading state
@@ -72,7 +84,7 @@ const Login = () => {
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${encodeURIComponent(
           query
-        )}&type=artist`,
+        )}&type=artist&limit=7`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -97,7 +109,7 @@ const Login = () => {
       <Navbar />
       <section
         id="login"
-        className="login flex flex-col justify-center pt-16 relative items-center h-dvh"
+        className="login flex flex-col justify-center pt-24 relative items-center h-auto"
       >
         <div className="w-full px-8">
           <div className="w-full p-8 flex flex-col justify-center items-center gap-12">
@@ -168,23 +180,40 @@ const Login = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4 w-full items-center">
-              {/* <p className="text-2xl text-primary font-black">
-                Recommended Artist
-              </p> */}
-
               <div className="flex gap-4 w-full flex-wrap items-center justify-center">
                 {artists.map((artist) => (
                   <div
-                    key="id"
+                    key={artist.id}
                     className="flex flex-col gap-4 items-center justify-center"
+                    onClick={
+                      myArtists.includes(artist.name)
+                        ? () => removeArtist(artist.name)
+                        : () => addArtist(artist.name)
+                    }
                   >
-                    <img
-                      src={
-                        artist.images.length > 0 ? artist.images[0].url : avatar
-                      }
-                      alt={artist.name}
-                      className="rounded-full w-40 h-40 object-fit"
-                    />
+                    <div className="relative">
+                      <img
+                        src={
+                          artist.images.length > 0
+                            ? artist.images[0].url
+                            : avatar
+                        }
+                        alt={artist.name}
+                        className={`rounded-full w-40 h-40 object-fit transition-all duration-300 ${
+                          myArtists.includes(artist.name)
+                            ? "brightness-50"
+                            : "brightness-100"
+                        }`}
+                      />
+                      {myArtists.includes(artist.name) ? (
+                        <img
+                          src={check}
+                          className="absolute w-12 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                        />
+                      ) : (
+                        <p className="hidden"></p>
+                      )}
+                    </div>
                     <p className="text-base font-normal text-neutral-800">
                       {artist.name}
                     </p>
