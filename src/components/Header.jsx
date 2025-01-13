@@ -7,69 +7,15 @@ import { useNavigate } from "react-router";
 const Header = ({ results, setResults }) => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState(null);
-  const [token, setToken] = useState(null);
+
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const client_id = "465d0f050b12484697177ff5238d3226"; // Replace with your Client ID
-  const client_secret = "be7cdee0d3f14182accbad398e70f645"; // Replace with your Client Secret
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const authOptions = {
-        url: "https://accounts.spotify.com/api/token",
-        headers: {
-          Authorization: "Basic " + btoa(`${client_id}:${client_secret}`),
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: new URLSearchParams({
-          grant_type: "client_credentials",
-        }),
-      };
-
-      try {
-        const response = await axios.post(authOptions.url, authOptions.data, {
-          headers: authOptions.headers,
-        });
-        if (response.status === 200) {
-          setToken(response.data.access_token);
-        }
-      } catch (error) {
-        console.error("Error fetching token", error);
-      }
-    };
-
-    fetchToken();
-  }, [client_id, client_secret]);
-
-  const search = async (query, accessToken) => {
-    try {
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist%2Calbum%2Cplaylist%2Ctrack&limit=10`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const result = [data.tracks.items, data.artists.items, data.albums.items, data.playlists.items];
-      return result;
-    } catch (error) {
-      console.error("Failed to search artists:", error.message);
-      throw error; // Propagate the error for the caller to handle
-    }
-  };
 
   const handleSearch = async () => {
     setLoading(true); // Set loading state
     try {
-      // const resultsQuery = await search(query, token);
-      // setResults(resultsQuery);
-      const response = await axios.post("http://127.0.0.1:8000/search-tracks/", { query: query, token: token });
-      setResults(response.data);
+      const response = await axios.post("http://127.0.0.1:8000/api/users", { query: query });
+      setResults(response.data.tracks);
     } catch (err) {
       setError(err.message); // Simpan pesan error
     } finally {
@@ -106,6 +52,14 @@ const Header = ({ results, setResults }) => {
           </div>
         </div>
       </form>
+      {/* {results && (
+        <div>
+          <h2>Results for :{query}</h2>
+          {results.map((result, index) => (
+            <ul key={index}>{result}</ul>
+          ))}
+        </div>
+      )} */}
       <div className="flex gap-4 items-center">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
