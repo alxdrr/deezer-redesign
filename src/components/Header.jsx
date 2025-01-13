@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 const Header = ({ results, setResults }) => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
   const [token, setToken] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -65,8 +66,10 @@ const Header = ({ results, setResults }) => {
   const handleSearch = async () => {
     setLoading(true); // Set loading state
     try {
-      const resultsQuery = await search(query, token);
-      setResults(resultsQuery);
+      // const resultsQuery = await search(query, token);
+      // setResults(resultsQuery);
+      const response = await axios.post("http://127.0.0.1:8000/search-tracks/", { query: query, token: token });
+      setResults(response.data);
     } catch (err) {
       setError(err.message); // Simpan pesan error
     } finally {
