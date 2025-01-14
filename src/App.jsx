@@ -49,17 +49,17 @@ const App = () => {
     <div className="w-screen h-dvh flex-col">
       <div className="w-screen relative h-[89%] flex">
         <Sidebar />
-        <div className="flex flex-col grow w-full">
+        <div className="flex flex-col grow h-full w-full">
           <Header results={searchResults} setResults={setSearchResults} />
-          {/* <Header /> */}
-          {location.pathname === "/home" ? <Home /> : ""}
-          {location.pathname === "/playlist" ? <Playlist /> : ""}
-          {location.pathname === "/search" ? <SearchResult results={searchResults} token={token} /> : ""}
-          {/* {location.pathname === "/search" ? <SearchResult /> : ""} */}
+          <div className="flex grow relative h-0">
+            {location.pathname === "/home" ? <Home /> : ""}
+            {location.pathname === "/playlist" ? <Playlist /> : ""}
+            {location.pathname === "/search" ? <SearchResult results={searchResults} token={token} /> : ""}
+            <Information isOpen={isOpen} />
+          </div>
 
           <audio ref={audioRef} src={track.file} preload="auto" onEnded={handleEnded}></audio>
         </div>
-        <Information isOpen={isOpen} />
       </div>
       <PlaybackBar drawer={() => setIsOpen(!isOpen)} />
     </div>

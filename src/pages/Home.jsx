@@ -5,7 +5,7 @@ import { songsData } from "../assets/object/songsData";
 
 const home = () => {
   return (
-    <div className="w-full h-0 flex flex-col gap-8 overflow-y-auto grow px-16 py-4">
+    <div className="w-full flex flex-col gap-8 overflow-y-auto grow px-16 py-4">
       <div className="w-full h-auto">
         <div className="flex px-3 py-4 gap-8 items-center">
           <img src={Avatar} alt="" className="rounded-full w-32" />

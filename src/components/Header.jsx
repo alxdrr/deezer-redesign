@@ -24,7 +24,7 @@ const Header = ({ results, setResults }) => {
   };
 
   return (
-    <div className="w-full border-b-2 flex justify-between px-8 py-4 max-h-16 items-center">
+    <div className="w-full border-b-2 flex justify-between px-8 py-4 items-center">
       <form onClick={() => navigate("/search")} method="post" className="flex flex-col gap-8 w-2/6">
         <div className="w-full flex flex-col gap-5">
           <div className="flex relative flex-col gap-2">

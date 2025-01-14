@@ -16,7 +16,7 @@ const Information = ({ isOpen }) => {
 
   return (
     <motion.div
-      className="absolute w-auto max-w-lg right-0 top-16 h-[89%] bg-slate-200 flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20"
+      className="absolute w-auto max-w-lg right-0 h-full bg-slate-200 flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20"
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={drawerVariants}
