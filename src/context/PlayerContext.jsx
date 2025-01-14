@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/object/songsData";
+import axios from "axios";
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
@@ -10,6 +11,7 @@ const PlayerContextProvider = (props) => {
   const [track, setTrack] = useState(songsData[9]);
   const [playStatus, setPlayStatus] = useState(false);
   const [repeatStatus, setRepeatStatus] = useState(false);
+  const [story, setStory] = useState("Crafting the story behind your song... Hang tight!");
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -19,7 +21,19 @@ const PlayerContextProvider = (props) => {
   });
 
   const [volume, setVolume] = useState(1);
-
+  const generateStory = async () => {
+    setStory("Crafting the story behind your song... Hang tight!"); // Reset pesan sebelum memulai permintaan
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/get-song-story", {
+        artist: track.artist,
+        title: track.name,
+      });
+      setStory(response.data.story);
+    } catch (error) {
+      setStory("Failed to load the story. Please try again.");
+      console.error("Error fetching story:", error);
+    }
+  };
   const handleVolumeChange = (e) => {
     const newVolume = e.target.value;
     setVolume(newVolume);
@@ -66,9 +80,7 @@ const PlayerContextProvider = (props) => {
   };
 
   const seekSong = async (e) => {
-    audioRef.current.currentTime =
-      (e.nativeEvent.offsetX / seekBg.current.offsetWidth) *
-      audioRef.current.duration;
+    audioRef.current.currentTime = (e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration;
   };
 
   const playWithId = async (id) => {
@@ -76,14 +88,13 @@ const PlayerContextProvider = (props) => {
     await audioRef.current.play();
     setPlayStatus(true);
   };
-
+  useEffect(() => {
+    generateStory();
+  }, [track]);
   useEffect(() => {
     setTimeout(() => {
       audioRef.current.ontimeupdate = () => {
-        seekBar.current.style.width =
-          Math.floor(
-            (audioRef.current.currentTime / audioRef.current.duration) * 100
-          ) + "%";
+        seekBar.current.style.width = Math.floor((audioRef.current.currentTime / audioRef.current.duration) * 100) + "%";
         setTime({
           currentTime: {
             second: Math.floor(audioRef.current.currentTime % 60),
@@ -98,6 +109,7 @@ const PlayerContextProvider = (props) => {
     });
   }, [audioRef]);
   const contextValue = {
+    story,
     audioRef,
     seekBg,
     seekBar,
@@ -119,11 +131,7 @@ const PlayerContextProvider = (props) => {
     seekSong,
     handleEnded,
   };
-  return (
-    <PlayerContext.Provider value={contextValue}>
-      {props.children}
-    </PlayerContext.Provider>
-  );
+  return <PlayerContext.Provider value={contextValue}>{props.children}</PlayerContext.Provider>;
 };
 
 export default PlayerContextProvider;

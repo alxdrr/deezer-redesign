@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AlbumCard from "../components/AlbumCard";
+// import AlbumCard from "../components/AlbumCard";
 const Search = ({ results, token }) => {
   const [trackData, setTrackData] = useState([]);
   const [loading, setLoading] = useState(false);
