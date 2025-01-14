@@ -10,7 +10,8 @@ const PlaybackBar = ({ drawer }) => {
   return (
     <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
       <div className="flex gap-4 h-full w-auto duration-150 items-center">
-        <img src={track.image} alt="Cover" className="h-full" />
+        {Object.keys(track).length <= 9 ? <img src={track.image} alt="Cover" className="h-full" /> : <img src={track.album.images[0].url} alt="Cover" className="h-full" />}
+
         <div className="flex flex-col">
           <p className="text-neutral-800 font-bold text-sm">{track.name}</p>
           <p className="text-neutral-600 text-xs">{track.artist}</p>

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/object/songsData";
+import noaudio from "../assets/mp3/noaudio.mp3";
 import axios from "axios";
 export const PlayerContext = createContext();
 
@@ -102,7 +103,7 @@ const PlayerContextProvider = (props) => {
     try {
       const response = await axios.post("http://127.0.0.1:8000/get-song-story", {
         artist: track.name,
-        title: track.artist[0],
+        title: `{${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`,
       });
       setStory(response.data.story);
     } catch (error) {
@@ -179,23 +180,30 @@ const PlayerContextProvider = (props) => {
   };
 
   const playWithId = async (id) => {
-    for (const data of trackData) {
-      if (data.name === id) {
-        await setTrack(data); // Mengatur track jika ditemukan
-        break; // Keluar dari loop setelah menemukan track
+    if (id.length > 2) {
+      for (const data of trackData) {
+        if (data.name === id) {
+          if (Object.keys(data).length > 9) {
+            const updatedData = { ...data, file: noaudio }; // Buat variabel baru
+            console.log("nih updatedData: ", updatedData);
+            await setTrack(updatedData); // Mengatur track jika ditemukan
+          }
+          break; // Keluar dari loop setelah menemukan track
+        }
       }
+    } else {
+      console.log("nih data: ", songsData[id]);
+      await setTrack(songsData[id]); // Mengatur track jika ditemukan
     }
-    await setTrack(songsData[id]);
+
     await audioRef.current.play();
     setPlayStatus(true);
   };
 
   useEffect(() => {
-    if (audioRef.current) {
-      const updateSeekBar = () => {
-        if (seekBar.current) {
-          seekBar.current.style.width = Math.floor((audioRef.current.currentTime / audioRef.current.duration) * 100) + "%";
-        }
+    setTimeout(() => {
+      audioRef.current.ontimeupdate = () => {
+        seekBar.current.style.width = Math.floor((audioRef.current.currentTime / audioRef.current.duration) * 100) + "%";
         setTime({
           currentTime: {
             second: Math.floor(audioRef.current.currentTime % 60),
@@ -207,14 +215,7 @@ const PlayerContextProvider = (props) => {
           },
         });
       };
-
-      audioRef.current.addEventListener("timeupdate", updateSeekBar);
-
-      // Cleanup event listener on component unmount
-      return () => {
-        audioRef.current.removeEventListener("timeupdate", updateSeekBar);
-      };
-    }
+    });
   }, [audioRef]);
 
   const contextValue = {

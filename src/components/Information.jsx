@@ -28,7 +28,7 @@ const Information = ({ isOpen }) => {
           </div>
 
           <div className="relative">
-            <img src={track.image} alt="Cover" className="z-10 rounded-lg" />
+            <img src={`${Object.keys(track).length <= 9 ? track.image : track.album.images[0].url}`} alt="Cover" className=" z-10 rounded-lg" />
             <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
           </div>
         </div>
@@ -45,14 +45,18 @@ const Information = ({ isOpen }) => {
         <h1 className="text-3xl text-neutral-800 font-black">Artist</h1>
         <div className="relative">
           <div className="relative w-full h-auto rounded-lg">
-            <img src={track.image} alt="Cover" className="w-full max-h-52 object-cover rounded-lg z-10 transition-opacity duration-300" />
+            <img
+              src={`${Object.keys(track).length <= 9 ? track.image : track.album.images[0].url}`}
+              alt="Cover"
+              className="w-full max-h-52 object-cover rounded-lg z-10 transition-opacity duration-300"
+            />
             <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-transparent to-black opacity-90"></div>
           </div>
 
           <div className="flex flex-col top-3 absolute left-3 w-auto">
             <div className="flex gap-2">
               <img src={verified} alt="" className="w-4" />
-              <h1 className="text-lg text-neutral-0 z-20 font-bold">{track.artist}</h1>
+              <h1 className="text-lg text-neutral-0 z-20 font-bold">{`${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`}</h1>
             </div>
 
             <p className="text-base z-20 w-auto text-white">{track.listener} Monthly Listener</p>
@@ -64,7 +68,11 @@ const Information = ({ isOpen }) => {
         <h1 className="text-3xl text-neutral-800 font-black">Story</h1>
         <div className="relative">
           <div className="relative w-full h-auto rounded-lg">
-            <img src={track.image} alt="Cover" className="w-full rounded-lg z-10 transition-opacity duration-300" />
+            <img
+              src={`${Object.keys(track).length <= 9 ? track.image : track.album.images[0].url}`}
+              alt="Cover"
+              className="w-full rounded-lg z-10 transition-opacity duration-300"
+            />
             <div className="absolute rounded-lg inset-0 bg-black/50"></div>
           </div>
 
