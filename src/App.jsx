@@ -52,7 +52,7 @@ const App = () => {
         <div className="flex flex-col grow h-full w-full">
           <Header results={searchResults} setResults={setSearchResults} />
           <div className="flex grow relative h-0">
-            {location.pathname === "/home" ? <Home /> : ""}
+            {location.pathname === "/home" ? <Home isOpen={isOpen} /> : ""}
             {location.pathname === "/playlist" ? <Playlist /> : ""}
             {location.pathname === "/search" ? <SearchResult results={searchResults} token={token} /> : ""}
             <Information isOpen={isOpen} />

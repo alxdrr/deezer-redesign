@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Avatar from "../assets/album-cover/Album6.jpg";
 import { PlayerContext } from "../context/PlayerContext";
 import { motion } from "framer-motion";
-import Loader from "../assets/icon/Ring.svg";
+import Loader from "../assets/icon/Loader.gif";
 import verified from "../assets/icon/information-verified.svg";
 import playGIF from "../assets/icon/play.gif";
 import playGIF2 from "../assets/icon/playWhite.gif";
@@ -16,7 +16,7 @@ const Information = ({ isOpen }) => {
 
   return (
     <motion.div
-      className="absolute w-auto max-w-lg right-0 h-full bg-slate-200 flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20"
+      className={`${isOpen ? "block" : "hidden"} w-auto max-w-lg right-0 h-full border-l-2 bg-white flex flex-col gap-2 overflow-y-auto grow px-2 py-2 z-20`}
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={drawerVariants}
@@ -72,7 +72,7 @@ const Information = ({ isOpen }) => {
 
           <div className="flex flex-col top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 w-full text-center px-6 leading-5">
             {story.length == 50 ? (
-              <div className="flex items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
                 <img src={Loader} alt="" />
                 <p className="text-xl z-20 w-auto text-white">{story}</p>
               </div>
