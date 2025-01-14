@@ -8,12 +8,13 @@ import { PlayerContext } from "../context/PlayerContext";
 const PlaybackBar = ({ drawer }) => {
   const { seekBar, seekBg, volume, handleVolumeChange, playStatus, repeatStatus, repeat, play, pause, track, time, previous, next, seekSong } = useContext(PlayerContext);
   return (
-    <div className="w-full h-[11%] border-t-2 p-3 flex items-center justify-between">
-      <div className="flex gap-4 h-full w-auto duration-150 items-center">
-        {Object.keys(track).length <= 9 ? <img src={track.image} alt="Cover" className="h-full" /> : <img src={track.album.images[0].url} alt="Cover" className="h-full" />}
+    <div className="w-full h-[11%] border-t-2 p-3 grid grid-cols-3 items-center justify-center">
+      <div className="flex row-span-2 gap-4 h-full duration-150 items-center">
+        {Object.keys(track).length <= 9 ? <img src={track.image} alt="Cover" className="h-16" /> : <img src={track.album.images[0].url} alt="Cover" className="h-16" />}
 
         <div className="flex flex-col">
-          <p className="text-neutral-800 font-bold text-sm">{track.name}</p>
+          <p className="text-neutral-800 font-bold text-sm line-clamp-1">{track.name}</p>
+
           <p className="text-neutral-600 text-xs">{track.artist}</p>
         </div>
         <div className="flex h-full gap-2 text-neutral-800 items-center">
@@ -21,7 +22,7 @@ const PlaybackBar = ({ drawer }) => {
           <FaPlus className="cursor-pointer" />
         </div>
       </div>
-      <div className="flex flex-col w-[35%] h-full items-center">
+      <div className="flex row-span-2 flex-col h-full justify-center items-center">
         <div className="flex gap-2 text-primary h-full items-center text-2xl">
           <IoShuffleOutline className="cursor-pointer" />
           <BiSkipPrevious onClick={previous} className="cursor-pointer" />
@@ -43,7 +44,7 @@ const PlaybackBar = ({ drawer }) => {
           </p>
         </div>
       </div>
-      <div className="flex gap-2 text-primary h-full items-center text-base max-w-1/3">
+      <div className="flex row-span-2 gap-2 justify-end text-primary h-full items-center text-base max-w-1/3">
         <IoListSharp className="cursor-pointer" />
         <IoWifiSharp className="cursor-pointer" />
         <div className="flex items-center w-[72px]">

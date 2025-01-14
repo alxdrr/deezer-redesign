@@ -38,7 +38,7 @@ const Information = ({ isOpen }) => {
             <img src={playGIF2} alt="" className={`h-6 ${playStatus ? "block" : "hidden"}`} />
             <h1 className="text-xl text-neutral-0 z-20 font-bold">{track.name}</h1>
           </div>
-          <p className="text-base z-20 w-auto text-white">{track.artist}</p>
+          <p className="text-base z-20 w-auto text-white">{`${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`}</p>
         </div>
       </div>
       <div className="flex relative flex-col bg-white rounded-lg w-full gap-2 px-3 py-3 shadow-2 transition-colors duration-150">
