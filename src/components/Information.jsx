@@ -4,9 +4,10 @@ import { PlayerContext } from "../context/PlayerContext";
 import { motion } from "framer-motion";
 import Loader from "../assets/icon/Ring.svg";
 import verified from "../assets/icon/information-verified.svg";
-
+import playGIF from "../assets/icon/play.gif";
+import playGIF2 from "../assets/icon/playWhite.gif";
 const Information = ({ isOpen }) => {
-  const { track, story } = useContext(PlayerContext);
+  const { track, story, playStatus } = useContext(PlayerContext);
   const drawerVariants = {
     open: { x: 0, opacity: 1 },
     closed: { x: "100%", opacity: 0 },
@@ -23,7 +24,11 @@ const Information = ({ isOpen }) => {
     >
       <div className="flex relative flex-col bg-white rounded-lg w-full gap-2 px-3 py-3 shadow-2 transition-colors duration-150 items-center">
         <div className="relative w-full h-auto flex flex-col gap-2 rounded-lg">
-          <h1 className="text-3xl text-neutral-800 font-black">Now Playing</h1>
+          <div className="flex items-center gap-4">
+            <img src={playGIF} alt="" className={`h-9 ${playStatus ? "block" : "hidden"}`} />
+            <h1 className={`text-3xl ${playStatus ? "text-primary" : "text-neutral-800"} font-black`}>Now Playing</h1>
+          </div>
+
           <div className="relative">
             <img src={track.image} alt="Cover" className="z-10 rounded-lg" />
             <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
@@ -31,7 +36,10 @@ const Information = ({ isOpen }) => {
         </div>
 
         <div className="flex flex-col bottom-6 absolute left-6 w-auto">
-          <h1 className="text-xl text-neutral-0 z-20 font-bold">{track.name}</h1>
+          <div className="flex items-center gap-2">
+            <img src={playGIF2} alt="" className={`h-6 ${playStatus ? "block" : "hidden"}`} />
+            <h1 className="text-xl text-neutral-0 z-20 font-bold">{track.name}</h1>
+          </div>
           <p className="text-base z-20 w-auto text-white">{track.artist}</p>
         </div>
       </div>
