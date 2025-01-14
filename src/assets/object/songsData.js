@@ -21,6 +21,7 @@ import song9 from "../mp3/song9.mp3";
 import song10 from "../mp3/song10.mp3";
 import song11 from "../mp3/song11.mp3";
 import song12 from "../mp3/song12.mp3";
+import blank from "../mp3/noaudio.mp3";
 
 export const songsData = [
   {
@@ -154,6 +155,17 @@ export const songsData = [
     listener: "96,900,321",
     artistProfile: `An iconic American singer-songwriter, Taylor Swift is known for her narrative songwriting and genre evolution, achieving immense success with hits like "Love Story" and "Shake It Off."`,
     about: `"Daylight" symbolizes hope and healing after darkness. Swift's reflective lyrics convey a sense of clarity and acceptance, celebrating love's transformative power while acknowledging past struggles.`,
+  },
+  {
+    id: 12,
+    name: "None",
+    artist: "None",
+    image: album1,
+    file: blank,
+    duration: "None",
+    listener: "None",
+    artistProfile: "None",
+    about: "None",
   },
 ];
 

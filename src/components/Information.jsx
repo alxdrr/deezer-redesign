@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import Avatar from "../assets/album-cover/Album6.jpg";
+import { useContext } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 import { motion } from "framer-motion";
 import Loader from "../assets/icon/Loader.gif";
@@ -12,7 +11,6 @@ const Information = ({ isOpen }) => {
     open: { x: 0, opacity: 1 },
     closed: { x: "100%", opacity: 0 },
   };
-  const [loading, setLoading] = useState(false);
 
   return (
     <motion.div

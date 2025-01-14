@@ -1,35 +1,28 @@
 import PlaylistCover from "../assets/image/PlaylistCover.png";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import Loader from "../assets/icon/Ring.svg";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { PlayerContext } from "../context/PlayerContext";
 
-const Header = ({ results, setResults }) => {
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const [error, setError] = useState(null);
+const Header = () => {
+  const { setQuery, query, loading, handleSearch } = useContext(PlayerContext);
   const navigate = useNavigate();
-
-  const handleSearch = async () => {
-    setLoading(true); // Set loading state
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/api/users", { query: query });
-      setResults(response.data.tracks);
-    } catch (err) {
-      setError(err.message); // Simpan pesan error
-    } finally {
-      setLoading(false); // Reset loading state
-    }
-  };
 
   return (
     <div className="w-full border-b-2 flex justify-between px-8 py-4  items-center">
-      <form onClick={() => navigate("/search")} method="post" className="flex flex-col gap-8 w-2/6">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // Mencegah reload halaman
+          handleSearch(); // Panggil fungsi pencarian
+          navigate("/search"); // Arahkan ke halaman Search
+        }}
+        method="post"
+        className="flex flex-col gap-8 w-2/6"
+      >
         <div className="w-full flex flex-col gap-5">
           <div className="flex relative flex-col gap-2">
             <span className="absolute left-0 flex inset-y-0 items-center pl-2">
-              <button type="submit" className="p-1 focus:outline-none focus:shadow-outline" onClick={handleSearch} disabled={loading}>
+              <button type="submit" className="p-1 focus:outline-none focus:shadow-outline" disabled={loading}>
                 {loading ? (
                   <img src={Loader} alt="" />
                 ) : (
@@ -40,7 +33,7 @@ const Header = ({ results, setResults }) => {
               </button>
             </span>
             <input
-              type="query"
+              type="text"
               name="query"
               id="query"
               className="bg-transparent w-full border-2 py-1 px-12 rounded-lg text-base border-based-1 outline-offset-0 text-neutral-800 focus:outline-primary focus:outline-2 focus:outline-offset-2 transition-all duration-200"
@@ -52,14 +45,6 @@ const Header = ({ results, setResults }) => {
           </div>
         </div>
       </form>
-      {/* {results && (
-        <div>
-          <h2>Results for :{query}</h2>
-          {results.map((result, index) => (
-            <ul key={index}>{result}</ul>
-          ))}
-        </div>
-      )} */}
       <div className="flex gap-4 items-center">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

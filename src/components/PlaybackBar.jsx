@@ -47,9 +47,6 @@ const PlaybackBar = ({ drawer }) => {
         <IoWifiSharp className="cursor-pointer" />
         <div className="flex items-center w-[72px]">
           <IoVolumeOff className="cursor-pointer" />
-          {/* <div className="w-full grow h-[3px] bg-neutral-400">
-            <hr className="h-[3px] w-0 border-none bg-primary cursor-pointer rounded-full" />
-          </div> */}{" "}
           <input
             id="volume"
             type="range"
