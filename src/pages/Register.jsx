@@ -6,7 +6,7 @@ import apple from "../assets/image/apple.png";
 import facebook from "../assets/image/facebook.png";
 import google from "../assets/image/google.png";
 import Button from "../components/Button";
-import Loader from "../assets/icon/Ring.svg";
+import Loader from "../assets/icon/playWhite.gif";
 import Navbar from "../components/Navbar";
 
 const Login = () => {
@@ -27,42 +27,59 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage(""); // Reset error message
+    setIsLoading(true); // Set loading state awal
+
+    // Validasi field
     if (!email || !password || !gender || !dob || !name) {
       setErrorMessage("Semua field harus diisi.");
-      setIsLoading(false);
+      setIsLoading(false); // Reset loading state
       return;
     }
-    const userData = { email, password, gender, dob, name };
-    setIsLoading(true);
+
     if (password !== confirmPassword) {
       setErrorMessage("Password dan konfirmasi password tidak cocok.");
-      setIsLoading(false);
-
+      setIsLoading(false); // Reset loading state
       return;
     }
+
+    const userData = { email, password, gender, dob, name };
+
     try {
       const response = await fetch("http://127.0.0.1:8000/api/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        credentials: "include", // Untuk mengirim cookies jika ada
         body: JSON.stringify(userData),
       });
+
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Response error:", errorData);
+        setErrorMessage(errorData.error || "Gagal melakukan registrasi."); // Tampilkan pesan error dari backend
+        return; // Hentikan eksekusi jika ada error
       }
-      const data = await response.json();
-      localStorage.setItem("isLoggedIn", true);
-      localStorage.setItem("user", JSON.stringify({ name: data.name, email: data.email, gender: data.gender, dob: data.dob }));
-      console.log("User ditemukan : ", data.data);
-      navigate("/");
+
+      const data = await response.json(); // Ambil respons berhasil
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: name,
+          email: email,
+          gender: gender,
+          dob: dob,
+        })
+      );
+      console.log("User ditemukan:", data);
+      navigate("/"); // Navigasi ke halaman utama
     } catch (error) {
-      setErrorMessage("Email atau Password Salah !");
-      console.log(error);
+      console.error("Request error:", error);
+      setErrorMessage("Terjadi kesalahan saat mencoba registrasi.");
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Reset loading state setelah semua selesai
     }
   };
 
@@ -195,10 +212,7 @@ const Login = () => {
                 </div>
                 {errorMessage && <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">{errorMessage}</p>}
               </div>
-
-              <Button type={"submit"} title={"Log in"}>
-                {isLoading ? <img src={Loader} className="mx-auto" /> : <p>Login</p>}
-              </Button>
+              <Button type={"submit"} title={isLoading ? <img src={Loader} className="h-full mx-auto" /> : <p>Register</p>}></Button>
             </form>
             <div className="flex flex-col gap-4 items-center">
               <p className="text-neutral-800 text-center text-base">or</p>
