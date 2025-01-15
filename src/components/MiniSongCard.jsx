@@ -10,7 +10,7 @@ const MiniSongCard = ({ title, artist, duration, image, id }) => {
       <div className="relative flex h-full gap-4 items-center">
         {/* Kode ketika di hover */}
 
-        <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 group-hover:z-30 transition-opacity duration-300">
+        <div className="absolute aspect-square flex items-center justify-center h-full group-hover:opacity-100 group-hover:z-10 transition-opacity duration-300">
           <img src={image} alt="Cover" className="brightness-50" />
           {playStatus && track.id === id ? (
             <>

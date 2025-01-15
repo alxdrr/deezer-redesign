@@ -1,16 +1,26 @@
 import Avatar from "../assets/image/profile.jpg";
 import MiniSongCard from "../components/MiniSongCard";
 import DailyPlaylistCard from "../components/DailyPlaylistCard";
-import { songsData } from "../assets/object/songsData";
 
-const home = ({ isOpen }) => {
+import { songsData } from "../assets/object/songsData";
+import { useState, useEffect } from "react";
+
+const Home = ({ isOpen }) => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      const userData = JSON.parse(localStorage.getItem("user"));
+      setUser(userData);
+    }
+  }, []);
   return (
     <div className="w-full mx-auto p-4 xl:p-10 flex flex-col gap-8 overflow-y-auto">
       <div className="w-full h-auto flex flex-col gap-8">
         <div className="flex gap-8 items-center">
           <img src={Avatar} alt="" className="rounded-full w-32" />
           <div className="flex flex-col">
-            <p className="text-4xl text-neutral-800 font-black">Good Evening</p>
+            <p className="text-4xl text-neutral-800 font-black">{`Good Afternoon, ${user.name}!`}</p>
             <p className="text-neutral-500">Let's explore some new tracks here</p>
           </div>
         </div>
@@ -52,4 +62,4 @@ const home = ({ isOpen }) => {
   );
 };
 
-export default home;
+export default Home;

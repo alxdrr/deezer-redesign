@@ -14,14 +14,6 @@ const Navbar = () => {
       setUser(userData);
     }
   }, []);
-  const logout = () => {
-    // Hapus data login dari localStorage
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("user");
-
-    // Redirect ke halaman login (jika menggunakan React Router)
-    window.location.href = "/login";
-  };
 
   return (
     <section id="navbar">
@@ -29,7 +21,7 @@ const Navbar = () => {
         <div className="hidden lg:flex justify-between items-center z-10">
           {/* Logo */}
           <Link className="z-10" to={"/"}>
-            <img onClick={() => logout()} className="h-10" src={logo} alt="Logo" />
+            <img className="h-10" src={logo} alt="Logo" />
           </Link>
 
           {/* Links */}

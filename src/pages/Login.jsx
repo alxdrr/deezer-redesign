@@ -49,7 +49,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.user)); // Pastikan backend mengirim data user
 
       // Arahkan ke halaman utama
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setErrorMessage(error.message || "Email atau Password Salah!");
       console.error("Login error:", error);
@@ -116,7 +116,7 @@ const Login = () => {
                     </label>
                   </div>
                 </div>
-                {errorMessage && <p className="text-wrongSelected underline-offset-2 underline text-xs text-center font-bold">{errorMessage}</p>}
+                {errorMessage && <p className="text-red-400 underline-offset-2 underline text-xs text-center font-bold">{errorMessage}</p>}
               </div>
 
               <Button type={"submit"} title={isLoading ? <img src={Loader} className="h-full mx-auto" /> : <p>Login</p>}></Button>

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import MiniPlaylist from "./MiniPlaylist";
 import Logo from "../assets/image/LogoBlack.png";
 import { Link, useLocation } from "react-router";
 import { IoSearch } from "react-icons/io5";
 import { BiHomeAlt2, BiCollection } from "react-icons/bi";
+import Modal from "../components/Modal";
 const Sidebar = () => {
   const location = useLocation();
+  const [state, setState] = useState(false);
   return (
     <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-full border-r-2">
       <div className="w-full flex flex-col gap-4 h-auto">
+        {state ? "true" : "false"}
         <img src={Logo} alt="Logo" className="max-w-32" />
         <ul>
           <Link to={"/home"}>
@@ -18,6 +21,7 @@ const Sidebar = () => {
               <p className="font-bold">Home</p>
             </li>
           </Link>
+          <Modal state={state} setState={setState} />
           <Link to={"/explore"}>
             <li className={`flex gap-4 items-center mb-4 hover:text-primary duration-100 cursor-pointer ${location.pathname === "/explore" ? "text-primary" : "text-neutral-500"}`}>
               <IoSearch />
@@ -39,7 +43,15 @@ const Sidebar = () => {
         </div>
       </div>
       <div id="container" className="flex flex-col gap-2 py-2 grow">
-        <Button variant={"outline"} type={"clickable"} title={"New Playlist"}></Button>
+        <div
+          className="p-0 m-0 w-full flex justify-center"
+          onClick={() => {
+            setState(!state);
+          }}
+        >
+          <Button variant={"outline"} type={"clickable"} title={"New Playlist"}></Button>
+        </div>
+
         <div id="playlist" className="flex flex-col gap-4 overflow-y-auto h-0 grow">
           <Link to={"/playlist"}>
             <MiniPlaylist />
