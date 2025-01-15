@@ -27,6 +27,11 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!email || !password || !gender || !dob || !name) {
+      setErrorMessage("Semua field harus diisi.");
+      setIsLoading(false);
+      return;
+    }
     const userData = { email, password, gender, dob, name };
     setIsLoading(true);
     if (password !== confirmPassword) {
@@ -45,7 +50,8 @@ const Login = () => {
         body: JSON.stringify(userData),
       });
       if (!response.ok) {
-        throw new Error("Failed to register");
+        const errorData = await response.json();
+        console.error("Response error:", errorData);
       }
       const data = await response.json();
       localStorage.setItem("isLoggedIn", true);
