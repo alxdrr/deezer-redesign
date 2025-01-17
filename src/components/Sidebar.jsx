@@ -12,7 +12,6 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col w-1/3 max-w-xs px-6 py-8 h-full border-r-2">
       <div className="w-full flex flex-col gap-4 h-auto">
-        {state ? "true" : "false"}
         <img src={Logo} alt="Logo" className="max-w-32" />
         <ul>
           <Link to={"/home"}>
