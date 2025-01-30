@@ -34,13 +34,13 @@ const PlaybackBar = ({ drawer }) => {
         </div>
         <div className="flex gap-2 w-full items-center">
           <p className="text-xs text-neutral-800">
-            {time.currentTime.minute}:{time.currentTime.second}
+            {time.currentTime.minute}:{time.currentTime.second < 10 ? `0${time.currentTime.second}` : time.currentTime.second}
           </p>
           <div ref={seekBg} onClick={seekSong} className="w-0 grow h-[3px] bg-neutral-500">
             <hr ref={seekBar} className="h-[3px] w-0 border-none bg-primary rounded-full cursor-pointer" />
           </div>
           <p className="text-xs text-neutral-800">
-            {time.totalTime.minute}:{time.totalTime.second}
+            {time.totalTime.minute}:{time.totalTime.second < 10 ? `0${time.totalTime.second}` : time.totalTime.second}
           </p>
         </div>
       </div>

@@ -69,7 +69,7 @@ const Header = () => {
             <ul
               data-popover="profile-menu"
               data-popover-placement="bottom"
-              className="absolute right-4 top-20 z-20 bg-white min-w-[320px] overflow-auto rounded-lg border border-slate-200 p-1 shadow-lg focus:outline-none"
+              className="absolute right-4 top-20 z-30 bg-white min-w-[320px] overflow-auto rounded-lg border border-slate-200 p-1 shadow-lg focus:outline-none"
             >
               <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
                 <div className="flex gap-1 items-center">

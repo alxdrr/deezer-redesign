@@ -101,7 +101,7 @@ const PlayerContextProvider = (props) => {
   const generateStory = async () => {
     setStory("Crafting the story behind your song... Hang tight!"); // Reset pesan sebelum memulai permintaan
     try {
-      const response = await axios.post("http://127.0.0.1:8000/get-song-story", {
+      const response = await axios.post("http://127.0.0.1:8000/api/get-song-story", {
         artist: track.name,
         title: `{${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`,
       });
@@ -121,7 +121,7 @@ const PlayerContextProvider = (props) => {
   const handleSearch = async () => {
     setLoading(true); // Set loading state
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/users", { query: query });
+      const response = await axios.post("http://127.0.0.1:8000/api/search", { query: query });
       setSearchResults(response.data.tracks);
     } catch (err) {
       setError(err.message); // Simpan pesan error

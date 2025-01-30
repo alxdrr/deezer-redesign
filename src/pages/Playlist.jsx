@@ -12,7 +12,7 @@ const Playlist = () => {
     setLoading(true); // Set loading state
   };
   return (
-    <div className="w-full h-0 flex flex-col gap-8 overflow-y-auto grow px-16 py-4">
+    <div className="w-full h-full flex flex-col gap-8 overflow-y-auto grow px-16 py-4">
       <div className="flex px-3 py-4 gap-8 items-center">
         <img src={Avatar} alt="" className="w-52" />
         <div className="flex flex-col gap-4 justify-between">
