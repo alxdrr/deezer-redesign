@@ -1,24 +1,35 @@
 import PlaylistCover from "../assets/image/PlaylistCover.png";
-import { useContext, useState } from "react";
+import { useContext, useState, useCallback } from "react";
 import Loader from "../assets/icon/Ring.svg";
 import { useNavigate } from "react-router";
 import { PlayerContext } from "../context/PlayerContext";
+import axios from "axios";
 
 const Header = () => {
   const { setQuery, query, loading, handleSearch } = useContext(PlayerContext);
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(false);
-  const handleAvatar = () => {
-    setAvatar(!avatar);
-  };
-  const logout = () => {
-    // Hapus data login dari localStorage
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("user");
 
-    // Redirect ke halaman login (jika menggunakan React Router)
-    window.location.href = "/login";
-  };
+  const handleAvatar = useCallback(() => {
+    setAvatar(!avatar);
+  }, [avatar]);
+
+  const logout = useCallback(async () => {
+    try {
+      // Panggil backend untuk menghapus session
+      await axios.post("http://127.0.0.1:8000/api/users/logout", {}, { withCredentials: true });
+
+      // Hapus data login dari localStorage
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("user");
+
+      // Redirect ke halaman login
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error.response?.data?.error || error.message);
+    }
+  }, [navigate]);
+
   return (
     <div className="w-full border-b-2 flex justify-between px-8 py-4  items-center">
       <form

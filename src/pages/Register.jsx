@@ -74,7 +74,7 @@ const Login = () => {
         })
       );
       console.log("User ditemukan:", data);
-      navigate("/"); // Navigasi ke halaman utama
+      navigate("/welcome"); // Navigasi ke halaman utama
     } catch (error) {
       console.error("Request error:", error);
       setErrorMessage("Terjadi kesalahan saat mencoba registrasi.");

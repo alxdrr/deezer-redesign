@@ -1,28 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "../assets/image/profile.jpg";
 import Loader from "../assets/icon/Ring.svg";
 import { FaRegHeart, FaRegShareFromSquare, FaEllipsisVertical } from "react-icons/fa6";
 import PlayButton from "../assets/icon/playbutton.svg";
 import Plus from "../assets/icon/plusSquare.svg";
-
+import { useParams } from "react-router";
+import axios from "axios";
 const Playlist = () => {
+  const { id } = useParams(); // Mengambil ID dari URL
+  const [playlist, setPlaylist] = useState(null);
+  const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSearch = async () => {
     setLoading(true); // Set loading state
   };
+
+  useEffect(() => {
+    const fetchPlaylist = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/playlist/${id}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+        setPlaylist(response.data); // Set data playlist ke state
+        console.log("Playlist:", response.data);
+      } catch (error) {
+        setError(error.response?.data?.error || error.message); // Tangani kesalahan
+      }
+    };
+
+    fetchPlaylist(); // Panggil fungsi untuk mengambil playlist
+  }, [id]); // Menambahkan id sebagai dependensi
+  const handleDeletePlaylist = async () => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/playlist/delete/${id}`, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+
+      console.log("Playlist deleted successfully");
+      // Redirect atau navigasi kembali setelah penghapusan
+      // Misalnya, menggunakan history.push atau navigate dari react-router-dom
+    } catch (error) {
+      console.error("Error deleting playlist:", error.response?.data?.error || error.message);
+    }
+  };
+  if (error) {
+    return <div>Error: {error}</div>; // Tampilkan pesan kesalahan jika ada
+  }
+  if (!playlist) {
+    return <div>Loading...</div>; // Tampilkan loading jika data belum tersedia
+  }
   return (
     <div className="w-full h-full flex flex-col gap-8 overflow-y-auto grow px-16 py-4">
       <div className="flex px-3 py-4 gap-8 items-center">
         <img src={Avatar} alt="" className="w-52" />
         <div className="flex flex-col gap-4 justify-between">
-          <p className="text-6xl text-neutral-800 font-black">My Playlist</p>
+          <p className="text-6xl text-neutral-800 font-black">{playlist.playlist_name}</p>
           <div className="flex gap-2 items-center">
             <img src={Avatar} alt="Avatar" className="rounded-full object-cover w-12 h-12" />
             <p>John Doe</p>
           </div>
           <p className="text-neutral-500">2 Tracks | 7 Minutes</p>
         </div>
+        <button onClick={handleDeletePlaylist} className="bg-red-500 text-white py-2 px-4 rounded">
+          Delete Playlist
+        </button>
       </div>
       <div className="flex justify-between">
         <div className="flex gap-2 text-2xl text-neutral-800 items-center w-full">

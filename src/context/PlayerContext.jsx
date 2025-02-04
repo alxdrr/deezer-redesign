@@ -25,6 +25,7 @@ const PlayerContextProvider = (props) => {
   const [query, setQuery] = useState("");
   const [track, setTrack] = useState(songsData[9]);
   const [playStatus, setPlayStatus] = useState(false);
+  const [shuffleStatus, setShuffleStatus] = useState(false);
   const [repeatStatus, setRepeatStatus] = useState(false);
   const [trackData, setTrackData] = useState([]); //search track from spotify API
   const [volume, setVolume] = useState(1);
@@ -142,6 +143,10 @@ const PlayerContextProvider = (props) => {
     setPlayStatus(true);
   };
 
+  const shuffle = () => {
+    setShuffleStatus(!shuffleStatus);
+  };
+
   const pause = () => {
     audioRef.current.pause();
     setPlayStatus(false);
@@ -225,6 +230,8 @@ const PlayerContextProvider = (props) => {
     query,
     setLoading,
     setQuery,
+    shuffleStatus,
+    shuffle,
     story,
     audioRef,
     seekBg,

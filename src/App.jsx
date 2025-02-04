@@ -22,7 +22,7 @@ const App = () => {
           <Header />
           <div className="flex grow relative h-0">
             {location.pathname === "/home" ? <Home isOpen={isOpen} /> : ""}
-            {location.pathname === "/playlist" ? <Playlist /> : ""}
+            {location.pathname.includes("/playlist") ? <Playlist /> : ""}
             {location.pathname === "/search" ? <SearchResult /> : ""}
             <Information isOpen={isOpen} />
           </div>

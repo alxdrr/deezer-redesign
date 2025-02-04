@@ -8,6 +8,7 @@ import google from "../assets/image/google.png";
 import Button from "../components/Button";
 import Loader from "../assets/icon/playWhite.gif";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -23,41 +24,29 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userData = { email, password };
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Opsional, gunakan jika backend mendukung session/cookie
-        body: JSON.stringify(userData),
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/users/login",
+        { email, password },
+        { withCredentials: true } // Penting untuk menyimpan session di backend
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to login");
-      }
-
-      const data = await response.json();
-      console.log("User ditemukan:", data);
-
+      console.log("User ditemukan:", response.data);
       // Simpan informasi login ke localStorage
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("user", JSON.stringify(data.user)); // Pastikan backend mengirim data user
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // Simpan data user jika dikirim dari backend
 
       // Arahkan ke halaman utama
       navigate("/home");
     } catch (error) {
-      setErrorMessage(error.message || "Email atau Password Salah!");
+      setErrorMessage(error.response?.data?.error || "Email atau Password Salah!");
       console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <div>
       <Navbar />

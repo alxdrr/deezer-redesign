@@ -2,10 +2,52 @@ import React, { useState, useEffect } from "react";
 import { Input, Option, Select, Dialog, Textarea, IconButton, Typography, DialogBody, DialogHeader, DialogFooter } from "@material-tailwind/react";
 import Button from "../components/Button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-export function Modal({ state, setState }) {
+import axios from "axios";
+export function Modal({ state, setState, onPlaylistCreated }) {
   const handleOpen = () => setState(!state);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Mencegah refresh halaman
+    setLoading(true); // Set loading state
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/playlist/create",
+        {
+          playlist_name: name,
+          user: user.email,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      console.log("Playlist created:", response.data);
+
+      // Panggil callback untuk memberi tahu bahwa playlist baru telah dibuat
+      if (onPlaylistCreated) {
+        onPlaylistCreated({
+          playlist_id: response.data.playlist_id,
+          playlist_name: response.data.playlist_name,
+          // Tambahkan properti lain jika ada
+        });
+      }
+
+      // Reset form
+      setName("");
+    } catch (error) {
+      setError(error.response?.data?.error || error.message); // Tangani kesalahan
+    } finally {
+      setLoading(false); // Set loading state kembali ke false
+      handleOpen(); // Tutup modal
+    }
+  };
 
   return (
     <>
@@ -17,7 +59,7 @@ export function Modal({ state, setState }) {
           </IconButton>
         </DialogHeader>
         <DialogBody>
-          <form method="post" className="flex flex-col gap-4">
+          <form method="post" onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-base font-bold text-neutral-800" htmlFor="text">
                 Name
@@ -49,11 +91,11 @@ export function Modal({ state, setState }) {
                 autoComplete="off"
               />
             </div>
+            <button className="bg-primary rounded-xl text-white py-2" type="submit" disabled={loading}>
+              {loading ? "Creating..." : "Create Playlist"}
+            </button>
           </form>
         </DialogBody>
-        <DialogFooter>
-          <Button variant={"primary"} type={"clickable"} title={"Create"}></Button>
-        </DialogFooter>
       </Dialog>
     </>
   );
