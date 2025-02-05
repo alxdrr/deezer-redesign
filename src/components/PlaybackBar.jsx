@@ -26,6 +26,7 @@ const PlaybackBar = ({ drawer }) => {
   };
   return (
     <div className="w-full relative h-[11%] border-t-2 p-3 grid grid-cols-3 items-center justify-center">
+      <script src="https://sdk.scdn.co/spotify-player.js"></script>
       <AnimatePresence>
         {isVisible && (
           <motion.div

@@ -2,6 +2,7 @@ import PlaylistCover from "../assets/image/PlaylistCover.png";
 import { useContext, useState, useCallback } from "react";
 import Loader from "../assets/icon/Ring.svg";
 import { useNavigate } from "react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import { PlayerContext } from "../context/PlayerContext";
 import axios from "axios";
 
@@ -76,42 +77,48 @@ const Header = () => {
         </svg>
         <div className="relative">
           <img src={PlaylistCover} alt="Avatar" className="rounded-full object-cover w-12 h-12 relative inline-block" data-popover-target="profile-menu" onClick={handleAvatar} />
-          {avatar && (
-            <ul
-              data-popover="profile-menu"
-              data-popover-placement="bottom"
-              className="absolute right-4 top-20 z-30 bg-white min-w-[320px] overflow-auto rounded-lg border border-slate-200 p-1 shadow-lg focus:outline-none"
-            >
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <div className="flex gap-1 items-center">
-                  <img src={PlaylistCover} alt="Avatar" className="rounded-full object-cover w-8 h-8 relative inline-block" data-popover-target="profile-menu" />
-                  <p className="text-slate-800 font-regular ml-2">My Profile</p>
-                </div>
-              </li>
-              <hr className="my-2 border-slate-200" />
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <p className="text-slate-800 font-regular ml-2">Account settings</p>
-              </li>
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <p className="text-slate-800 font-regular ml-2">Dark Mode</p>
-              </li>
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <p className="text-slate-800 font-regular ml-2">Manage my subscription</p>
-              </li>
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <p className="text-slate-800 font-regular ml-2">Manage my exclusions</p>
-              </li>
-              <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                <p className="text-slate-800 font-regular ml-2">Activate a code</p>
-              </li>
-              <li
-                className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
-                onClick={() => logout()}
+          <AnimatePresence>
+            {avatar && (
+              <motion.ul
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="absolute right-4 top-12 z-30 bg-white min-w-[320px] overflow-auto rounded-lg border border-slate-200 p-1 shadow-lg"
               >
-                <p className="text-red-400 font-regular ml-2">Log Out</p>
-              </li>
-            </ul>
-          )}
+                <ul data-popover="profile-menu" data-popover-placement="bottom">
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <div className="flex gap-1 items-center">
+                      <img src={PlaylistCover} alt="Avatar" className="rounded-full object-cover w-8 h-8 relative inline-block" data-popover-target="profile-menu" />
+                      <p className="text-slate-800 font-regular ml-2">My Profile</p>
+                    </div>
+                  </li>
+                  <hr className="my-2 border-slate-200" />
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <p className="text-slate-800 font-regular ml-2">Account settings</p>
+                  </li>
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <p className="text-slate-800 font-regular ml-2">Dark Mode</p>
+                  </li>
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <p className="text-slate-800 font-regular ml-2">Manage my subscription</p>
+                  </li>
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <p className="text-slate-800 font-regular ml-2">Manage my exclusions</p>
+                  </li>
+                  <li className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                    <p className="text-slate-800 font-regular ml-2">Activate a code</p>
+                  </li>
+                  <li
+                    className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-2.5 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
+                    onClick={() => logout()}
+                  >
+                    <p className="text-red-400 font-regular ml-2">Log Out</p>
+                  </li>
+                </ul>
+              </motion.ul>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ const PlayerContextProvider = (props) => {
   const audioRef = useRef();
   const seekBg = useRef();
   const seekBar = useRef();
+  const [musicID, setMusicID] = useState("");
   const [story, setStory] = useState("Crafting the story behind your song... Hang tight!");
   const [time, setTime] = useState({
     currentTime: {
@@ -86,6 +87,7 @@ const PlayerContextProvider = (props) => {
         .filter(Boolean); // Hilangkan undefined/null
 
       setTrackData(tracks);
+      console.log("nih trackData: ", tracks);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -189,8 +191,7 @@ const PlayerContextProvider = (props) => {
       for (const data of trackData) {
         if (data.name === id) {
           if (Object.keys(data).length > 9) {
-            const updatedData = { ...data, file: noaudio }; // Buat variabel baru
-            console.log("nih updatedData: ", updatedData);
+            const updatedData = { ...data, file: noaudio, duration: data.duration_ms }; // Buat variabel baru
             await setTrack(updatedData); // Mengatur track jika ditemukan
           }
           break; // Keluar dari loop setelah menemukan track
@@ -246,6 +247,8 @@ const PlayerContextProvider = (props) => {
     setTime,
     play,
     pause,
+    musicID,
+    setMusicID,
     repeatStatus,
     repeat,
     playWithId,

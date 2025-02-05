@@ -4,8 +4,10 @@ import { PlayerContext } from "../context/PlayerContext";
 import { IoPlayCircleSharp, IoPauseCircleSharp } from "react-icons/io5";
 // import AlbumCard from "../components/AlbumCard";
 const Search = () => {
-  const { playWithId, playStatus, pause, searchResults, trackData, track } = useContext(PlayerContext);
-
+  const { playWithId, playStatus, setMusicID, pause, searchResults, trackData, track } = useContext(PlayerContext);
+  const handlePlaySong = (id) => {
+    setMusicID(id);
+  };
   function formatMilliseconds(ms) {
     // Menghitung total detik dari milidetik
     const totalSeconds = Math.floor(ms / 1000);
@@ -48,7 +50,12 @@ const Search = () => {
                             <IoPauseCircleSharp onClick={() => pause()} className="text-primary bg-white rounded-full text-2xl cursor-pointer absolute" />
                           </>
                         ) : (
-                          <IoPlayCircleSharp onClick={() => playWithId(result.name)} className="text-primary bg-white rounded-full text-2xl absolute cursor-pointer" />
+                          <IoPlayCircleSharp
+                            onClick={() => {
+                              handlePlaySong(result.id), playWithId(result.name);
+                            }}
+                            className="text-primary bg-white rounded-full text-2xl absolute cursor-pointer"
+                          />
                         )}
                       </div>
                       <img src={result.album.images[0].url} alt="" className="w-12 z-0 group-hover:opacity-0 transition-opacity duration-300" />
