@@ -6,7 +6,7 @@ import verified from "../assets/icon/information-verified.svg";
 import playGIF from "../assets/icon/play.gif";
 import playGIF2 from "../assets/icon/playWhite.gif";
 const Information = ({ isOpen }) => {
-  const { track, story, playStatus } = useContext(PlayerContext);
+  const { track, story, playStatus, aboutArtist } = useContext(PlayerContext);
   const drawerVariants = {
     open: { x: 0, opacity: 1 },
     closed: { x: "100%", opacity: 0 },
@@ -61,7 +61,7 @@ const Information = ({ isOpen }) => {
 
             <p className="text-base z-20 w-auto text-white">{track.listener} Monthly Listener</p>
           </div>
-          <p className="text-neutral-600 text-base pt-2">{track.artistProfile}</p>
+          <p className="text-neutral-600 text-base pt-2">{aboutArtist}</p>
         </div>
       </div>
       <div className="flex relative flex-col bg-white rounded-lg w-full gap-2 px-3 py-3 shadow-2 transition-colors duration-150">

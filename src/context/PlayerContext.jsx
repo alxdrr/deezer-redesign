@@ -10,6 +10,7 @@ const PlayerContextProvider = (props) => {
   const seekBar = useRef();
   const [musicID, setMusicID] = useState("");
   const [story, setStory] = useState("Crafting the story behind your song... Hang tight!");
+  const [aboutArtist, setAboutArtist] = useState("");
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -105,8 +106,8 @@ const PlayerContextProvider = (props) => {
     setStory("Crafting the story behind your song... Hang tight!"); // Reset pesan sebelum memulai permintaan
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/get-song-story", {
-        artist: track.name,
-        title: `{${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`,
+        title: track.name,
+        artist: `{${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`,
       });
       setStory(response.data.story);
     } catch (error) {
@@ -114,10 +115,21 @@ const PlayerContextProvider = (props) => {
       console.error("Error fetching story:", error);
     }
   };
-
+  const generateArtist = async () => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/artist/get-about-artist", {
+        artist: `{${Object.keys(track).length <= 9 ? track.artist : track.artists[0].name}`,
+      });
+      setAboutArtist(response.data.artist);
+    } catch (error) {
+      setAboutArtist("Failed to load the data. Please try again.");
+      console.error("Error fetching data:", error);
+    }
+  };
   // reload function on track changes
   useEffect(() => {
     generateStory();
+    generateArtist();
   }, [track]);
 
   // get track title from csv dataset
@@ -245,6 +257,7 @@ const PlayerContextProvider = (props) => {
     setPlayStatus,
     time,
     setTime,
+    aboutArtist,
     play,
     pause,
     musicID,
