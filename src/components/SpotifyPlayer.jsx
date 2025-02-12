@@ -70,7 +70,6 @@ const SpotifyPlayer = ({ token }) => {
       } else {
         await playSong(`spotify:track:${musicID}`);
       }
-      setIsPlaying(!isPlaying);
     };
     togglePlayPause();
   }, [playStatus]);

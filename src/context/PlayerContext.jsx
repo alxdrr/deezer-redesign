@@ -2,6 +2,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/object/songsData";
 import noaudio from "../assets/mp3/noaudio.mp3";
 import axios from "axios";
+import { audio } from "framer-motion/client";
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
@@ -197,7 +198,16 @@ const PlayerContextProvider = (props) => {
   const seekSong = async (e) => {
     audioRef.current.currentTime = (e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration;
   };
+  const [currentTime, setCurrentTime] = useState(0);
 
+  // Di dalam efek yang memantau pemutaran
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(audioRef.current.currentTime);
+    }, 1000);
+
+    return () => clearInterval(interval); // Membersihkan interval saat komponen tidak lagi digunakan
+  }, [playStatus]);
   const playWithId = async (id) => {
     if (id.length > 2) {
       for (const data of trackData) {
@@ -210,11 +220,10 @@ const PlayerContextProvider = (props) => {
         }
       }
     } else {
-      console.log("nih data: ", songsData[id]);
       await setTrack(songsData[id]); // Mengatur track jika ditemukan
     }
-
     await audioRef.current.play();
+
     setPlayStatus(true);
   };
 
@@ -267,6 +276,7 @@ const PlayerContextProvider = (props) => {
     playWithId,
     previous,
     next,
+    currentTime,
     seekSong,
     handleEnded,
   };
